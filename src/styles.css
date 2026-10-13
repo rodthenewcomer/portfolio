@@ -466,3 +466,58 @@ button{border:0}
 
 
 
+
+/* Recruiter-friendly case-study navigation: quick access without a sticky overlay. */
+.case-jump {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 24px;
+  padding-bottom: 25px;
+  border-top: 1px solid #dfe4de;
+  border-bottom: 1px solid #dfe4de;
+}
+.case-jump-label {
+  color: #526057;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .11em;
+}
+.case-jump-links {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.case-jump-links a {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid #e2e5e1;
+  border-radius: 9px;
+  background: #fff;
+  color: #303834;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+  transition: border-color .2s ease, background-color .2s ease;
+}
+.case-jump-links a:hover { background: #f0f2ff; border-color: #aab9f2; }
+.case-jump-links a > span { color: #5269db; font-size: 10px; }
+.case-jump-links a > svg { margin-left: auto; flex-shrink: 0; color: #61716a; }
+#case-problem, #case-decisions, #case-system, #case-build { scroll-margin-top: 106px; }
+@media (max-width: 900px) {
+  .case-jump-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .case-jump { padding-top: 20px; padding-bottom: 21px; }
+  .case-jump-links { gap: 8px; }
+  .case-jump-links a { min-height: 50px; padding: 9px; font-size: 11px; }
+  .case-jump-links a > svg { width: 12px; }
+  #case-problem, #case-decisions, #case-system, #case-build { scroll-margin-top: 85px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .case-jump-links a { transition: none; }
+}
