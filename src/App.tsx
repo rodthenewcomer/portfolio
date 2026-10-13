@@ -254,7 +254,7 @@ function Contact() {
   return <section className="contact-wrap" id="contact"><div className="container contact-inner"><div className="contact-top"><span>LET'S WORK TOGETHER</span><CareerBadge text="Open to full-time roles"/></div><div className="contact-main" data-reveal><h2>Let’s make something <em>useful together.</em></h2><p>I’m looking for a long-term software role where I can solve real problems, work with a good team and keep getting better at the craft.</p><a className="button button-light" href={profileUrl} rel="noreferrer" target="_blank">View my GitHub <ArrowUpRight size={19}/></a></div><div className="contact-bottom"><span>UNITED STATES · REMOTE & ON-SITE OPEN</span><span>ENGINEERING · COLLABORATION · QUALITY</span></div></div></section>;
 }
 function Footer() {
-  return <footer className="site-footer"><div className="container footer-content"><Brand/><span>Selected software projects · {activeYear}</span><a href={profileUrl} target="_blank" rel="noreferrer" aria-label="GitHub profile"><GitBranch size={19}/><ArrowUpRight size={14}/></a></div></footer>;
+  return <footer className="site-footer"><div className="container footer-content"><Brand/><span>Selected software projects · {activeYear}</span><a href="https://github.com/rodthenewcomer/portfolio" target="_blank" rel="noreferrer" aria-label="View the source code of this portfolio on GitHub" title="Portfolio source code"><GitBranch size={19}/><ArrowUpRight size={14}/></a></div></footer>;
 }
 function HomePage() {
   useEffect(()=>{document.title="Moustapha Adebigni — Software Developer & AI Integrations";},[]);

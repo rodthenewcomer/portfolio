@@ -1,24 +1,27 @@
-# Moustapha Adebigni — Selected Software Projects
+# Moustapha Adebigni — Software Developer & AI Integrations
 
-**Software Developer · AI Integrations**
+**[Explore the live portfolio](https://moustapha-adebigni.vercel.app)**
 
-An English-language portfolio of four engineering case studies: Bridget (macOS AI workflows), Edge Forensics (data analytics and AI interpretation), Pokou AI (customer operations and conversational AI), and CROWN (native iOS game architecture).
+I like building useful software and figuring out how the pieces fit together. This portfolio takes a closer look at four projects I've worked on:
 
-## Why this exists
+- **Bridget** — a native Mac workspace for AI agents, approved actions and task tracking.
+- **Edge Forensics** — trading-history analysis with calculated metrics and AI-assisted behavioral feedback.
+- **Pokou AI** — customer conversations connected to business workflows and human handoffs.
+- **CROWN** — a native iPhone checkers game with four playable rulesets and a modular Swift engine.
 
-This is a **job-seeking software portfolio**, not a product sales page. Each case study explains a real problem, the software system, key engineering decisions, supported functionality and implementation work.
+Each case study explains the problem, the technical choices and what the software does. These are privately developed applications, so the site uses its own illustrative visuals rather than exposing proprietary code or confidential data.
 
-The commercial codebases remain **private**. Illustrative interface artwork explains the project concepts; it is not presented as actual screenshots. No private source code, credentials, customer information or fabricated adoption figures are included.
+## The portfolio itself
 
-## Built with
+I built this site with **React, TypeScript, Vite and React Router**, plus a custom responsive design system. No page template, stock photography or gradients.
 
-React 19 · TypeScript · Vite · React Router · CSS
+A few details I cared about: readable typography, clean layouts at small screen sizes, keyboard navigation, reduced-motion support, quiet animations and honest project descriptions.
 
-The interface uses responsive layouts, deliberate scroll motion, keyboard-accessible navigation, reduced-motion support and four navigable case studies.
+The portfolio passed automated desktop and mobile accessibility checks against WCAG 2.1 AA rules.
 
-## Run it
+## Run it locally
 
-Requires Node.js 22+.
+You'll need Node.js 22 or newer.
 
 ```bash
 npm ci
@@ -28,17 +31,21 @@ npm run build
 npm run preview
 ```
 
-Static output is generated in `dist/`; Vercel handles direct navigation to each React Router path.
+The production build goes to `dist/`. Vercel handles deep links for the four case-study routes.
 
-## Content maintenance
+## Updating the project content
 
-Verified project facts and technologies live in `src/projects.json`.
+The written project information lives in `src/projects.json`.
 
-- `/projects/bridget`
-- `/projects/edge-forensics`
-- `/projects/pokou-ai`
-- `/projects/crown`
+| Case study | Route |
+| --- | --- |
+| Bridget | `/projects/bridget` |
+| Edge Forensics | `/projects/edge-forensics` |
+| Pokou AI | `/projects/pokou-ai` |
+| CROWN | `/projects/crown` |
 
-Only supported claims should be published. A functional feature can be described without making unsupported statements about customers, production launches, or features outside the current implementation.
+**A note on the visuals:** the product illustrations are explanatory mockups, not screenshots of live user data. The underlying product repositories stay private.
 
-This site was built to support long-term software development and AI-integration job applications.
+---
+
+Looking for a software development role where I can help build useful products, work with a team and keep growing.
