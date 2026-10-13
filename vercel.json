@@ -3,9 +3,10 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    {
-      "source": "/((?!assets/|favicon\\.svg|robots\\.txt|sitemap\\.xml).*)",
-      "destination": "/index.html"
-    }
+    {"source": "/projects/bridget", "destination": "/projects/bridget/index.html"},
+    {"source": "/projects/edge-forensics", "destination": "/projects/edge-forensics/index.html"},
+    {"source": "/projects/pokou-ai", "destination": "/projects/pokou-ai/index.html"},
+    {"source": "/projects/crown", "destination": "/projects/crown/index.html"},
+    {"source": "/((?!assets/|favicon\\.svg|robots\\.txt|sitemap\\.xml).*)", "destination": "/index.html"}
   ]
 }
