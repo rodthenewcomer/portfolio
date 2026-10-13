@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#181c19"/>
+  <path d="M0 116H1200M0 510H1200" stroke="#353d37" stroke-width="1"/>
+  <rect x="76" y="48" width="56" height="56" rx="16" fill="#f4f4f0"/>
+  <text x="104" y="83" font-family="Arial,Helvetica,sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#171b19">M</text>
+  <circle cx="117" cy="89" r="4" fill="#5269ec"/>
+  <text x="152" y="69" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#fbfbf7">MOUSTAPHA ADEBIGNI</text>
+  <text x="152" y="94" font-family="Arial,Helvetica,sans-serif" font-size="11" letter-spacing="2" fill="#c0cac3">SOFTWARE DEVELOPER · AI INTEGRATIONS</text>
+  <text x="76" y="220" font-family="Arial,Helvetica,sans-serif" font-size="74" font-weight="700" letter-spacing="-3" fill="#f9faf7">I build software</text>
+  <text x="76" y="307" font-family="Georgia,Times New Roman,serif" font-style="italic" font-size="84" fill="#b6c0ff">that just works.</text>
+  <text x="76" y="375" font-family="Arial,Helvetica,sans-serif" font-size="21" fill="#b6c0b9">AI agents · Data analytics · Business automation · Native iOS</text>
+  <rect x="76" y="427" width="960" height="1" fill="#48524a"/>
+  <text x="76" y="464" font-family="Arial,Helvetica,sans-serif" font-size="13" letter-spacing="2.2" font-weight="700" fill="#d9dfd8">SELECTED PROJECTS / 2026</text>
+  <text x="76" y="555" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#bfc9c2">BRIDGET</text>
+  <text x="286" y="555" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#bfc9c2">EDGE FORENSICS</text>
+  <text x="555" y="555" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#bfc9c2">POKOU AI</text>
+  <text x="774" y="555" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#bfc9c2">CROWN</text>
+  <rect x="995" y="51" width="128" height="32" rx="16" fill="#2a382f" stroke="#405848"/>
+  <circle cx="1016" cy="67" r="4" fill="#9bdcb3"/>
+  <text x="1029" y="71" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#d6e7d9">OPEN TO WORK</text>
+  <text x="76" y="603" font-family="Arial,Helvetica,sans-serif" font-size="11" letter-spacing="2" fill="#8f9c92">FOUR PROJECTS. ONE PRACTICAL APPROACH.</text>
+</svg>

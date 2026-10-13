@@ -1,0 +1,240 @@
+[
+  {
+    "slug": "bridget",
+    "number": "01",
+    "name": "Bridget",
+    "category": "AI agents & automation",
+    "discipline": "Native macOS · Intelligent workflows",
+    "type": "agent",
+    "headline": "An AI assistant that can follow through.",
+    "summary": "A Mac app that turns a request into a plan, works through approved steps, and helps you see what actually got done.",
+    "stack": [
+      "Swift",
+      "SwiftUI",
+      "macOS",
+      "Agent orchestration",
+      "Local execution",
+      "Permissions"
+    ],
+    "facts": [
+      [
+        "macOS",
+        "Native app"
+      ],
+      [
+        "Agents",
+        "Coordinated workflows"
+      ],
+      [
+        "SwiftUI",
+        "User interface"
+      ]
+    ],
+    "challenge": "AI assistants are great at explaining what to do. But I kept running into the same problem: I still had to open the apps, find the files and finish everything myself. On a Mac, even a small task can involve several tools and a few important permission checks.",
+    "solution": "Bridget puts those pieces in one native workspace. Tasks have clear states, agents have specific responsibilities, and access to the Mac goes through explicit permissions. The idea is simple: less back-and-forth, more useful work completed.",
+    "decisions": [
+      [
+        "Put the task first",
+        "I organized the experience around what needs attention, what's running and what's finished. You shouldn't have to remember which chat or tool holds the next step."
+      ],
+      [
+        "Keep control close to the user",
+        "An agent can suggest an action, but that doesn't automatically give it permission. Local access and approvals are built into the workflow."
+      ],
+      [
+        "Check the result",
+        "A confident 'done' isn't enough. The interface needs to show what happened, whether the step succeeded and what needs attention next."
+      ]
+    ],
+    "flow": [
+      "Goal",
+      "Plan",
+      "Permissions",
+      "Execute",
+      "Verify"
+    ],
+    "status": "A native macOS workspace with task tracking, permission-aware execution, connected capabilities and a specialized RodTrader AI workflow.",
+    "next": "Reliable permissions, multi-step execution and verifiable task outcomes.",
+    "contribution": "I worked on the SwiftUI experience, task flows, agent integration boundaries and hands-on testing, using AI coding tools to help build and review the application.",
+    "lesson": "An assistant becomes useful when you can trust what it did, not just what it says it did."
+  },
+  {
+    "slug": "edge-forensics",
+    "number": "02",
+    "name": "Edge Forensics",
+    "category": "AI & analytics",
+    "discipline": "Behavioral analysis · Full-stack SaaS",
+    "type": "analytics",
+    "headline": "A clearer picture of why trades go wrong.",
+    "summary": "A tool that reads futures-trading history, calculates performance metrics and highlights habits that are easy to miss in a spreadsheet.",
+    "stack": [
+      "Next.js 16",
+      "React",
+      "TypeScript",
+      "Claude API",
+      "Supabase",
+      "PostgreSQL",
+      "Stripe"
+    ],
+    "facts": [
+      [
+        "14",
+        "Behavior patterns"
+      ],
+      [
+        "4",
+        "Import formats"
+      ],
+      [
+        "Journal",
+        "Session follow-up"
+      ]
+    ],
+    "challenge": "Traders usually know when they've lost money. What's harder is spotting the habits behind those losses. Revenge trading, rushed entries or bigger-than-usual positions can disappear inside a long list of trades.",
+    "solution": "I designed the experience around a straightforward loop: import trade history, calculate the numbers, review AI-assisted feedback, then write down one behavior to focus on next time. The report and journal work together rather than feeling like separate tools.",
+    "decisions": [
+      [
+        "Do the math in code",
+        "Metrics like R multiples and trade duration are calculated before an AI model sees the data. The explanation can be flexible, but the numbers need to stay reliable."
+      ],
+      [
+        "Show what matters first",
+        "Instead of a report full of charts, the experience starts with the patterns that deserve attention and the evidence behind them."
+      ],
+      [
+        "Make the feedback useful tomorrow",
+        "A journal links the analysis to the next session, so a good insight doesn't get forgotten as soon as the report is closed."
+      ]
+    ],
+    "flow": [
+      "Trade export",
+      "Parse",
+      "Metrics",
+      "AI analysis",
+      "Report & journal"
+    ],
+    "status": "Trade imports from four broker formats, calculated metrics, AI-assisted pattern reviews, structured reports and a session journal.",
+    "next": "Calculated metrics, explained patterns and structured follow-up.",
+    "contribution": "I worked through the import experience, analytics requirements, report design, API integration and QA. Getting the numbers right mattered as much as making the report easy to read.",
+    "lesson": "Code should handle the math. AI is more helpful when it's explaining the patterns behind it."
+  },
+  {
+    "slug": "pokou-ai",
+    "number": "03",
+    "name": "Pokou AI",
+    "category": "Conversational AI",
+    "discipline": "Business automation · Operations SaaS",
+    "type": "business",
+    "headline": "Helping businesses keep up with every customer.",
+    "summary": "An AI assistant that connects customer conversations to practical tasks, from handling questions to passing the right details to a teammate.",
+    "stack": [
+      "Next.js 15",
+      "TypeScript",
+      "Fastify",
+      "OpenAI",
+      "Supabase",
+      "PostgreSQL",
+      "Redis"
+    ],
+    "facts": [
+      [
+        "2",
+        "Industry modules"
+      ],
+      [
+        "Multiple",
+        "Channel interfaces"
+      ],
+      [
+        "Human",
+        "Handoff workflow"
+      ]
+    ],
+    "challenge": "A customer asks a question in chat. Someone needs to check the details, follow up and confirm what happens next. When those steps sit in different apps or people's memories, requests can easily get missed.",
+    "solution": "Pokou brings conversations and everyday business work into one flow. A shared engine handles common tasks, while hotel and school modules add the details each business needs. The handoff to a person is part of the design, not an afterthought.",
+    "decisions": [
+      [
+        "Start with the job, not the chatbot",
+        "The important question isn't whether the AI sounds impressive. It's whether a customer's request moves to a useful next step."
+      ],
+      [
+        "Reuse what every business needs",
+        "Common workflows live in one engine. Industry modules bring in the specific rules instead of duplicating the entire system."
+      ],
+      [
+        "Make human handoff easy",
+        "When a person needs to step in, the useful context should go with the request. Nobody should have to start the conversation from scratch."
+      ]
+    ],
+    "flow": [
+      "Customer request",
+      "Intent",
+      "Rules",
+      "Action",
+      "Confirm / hand off"
+    ],
+    "status": "A shared business engine, customer conversation workflows, human handoff and dedicated hotel and school modules.",
+    "next": "Customer operations with safe escalation and shared business rules.",
+    "contribution": "I mapped customer journeys, worked through service integrations and business workflows, and checked how requests move from a message to an action.",
+    "lesson": "A good AI assistant doesn't just respond quickly. It helps someone finish the job."
+  },
+  {
+    "slug": "crown",
+    "number": "04",
+    "name": "CROWN",
+    "category": "Native iOS",
+    "discipline": "Game systems · Modular Swift",
+    "type": "game",
+    "headline": "A checkers game where every move makes sense.",
+    "summary": "A native iPhone checkers game with four rule variants, a responsive board and complete offline matches.",
+    "stack": [
+      "Swift 6",
+      "SwiftUI",
+      "SpriteKit",
+      "SwiftData",
+      "GameCore",
+      "Game AI"
+    ],
+    "facts": [
+      [
+        "4",
+        "Rulesets"
+      ],
+      [
+        "8×8 / 10×10",
+        "Board formats"
+      ],
+      [
+        "Offline",
+        "Full match flow"
+      ]
+    ],
+    "challenge": "A checkers board can look beautiful and still play wrong. Captures, promotions and winning conditions change across variants, so I needed a reliable way to keep the rules consistent without burying them in the interface code.",
+    "solution": "CROWN separates the game rules from what players see. A Swift rules engine decides which moves are legal, while SpriteKit draws the board and SwiftUI handles the rest of the app. That makes it easier to test a move without testing an entire screen.",
+    "decisions": [
+      [
+        "Let the rules engine decide",
+        "GameCore is the single place that determines legal moves and results. The board never invents its own rules."
+      ],
+      [
+        "Make the board feel native",
+        "SwiftUI and SpriteKit work together so the game can have a responsive board without sacrificing familiar iPhone navigation."
+      ],
+      [
+        "Test complete matches",
+        "The offline flow runs from selecting a rule set through playing, seeing a result and starting again. That catches problems that isolated move tests might miss."
+      ]
+    ],
+    "flow": [
+      "Select rules",
+      "Match setup",
+      "GameCore",
+      "SpriteKit",
+      "Result"
+    ],
+    "status": "Offline matches in American, Brazilian, Russian and International checkers, against a basic computer opponent or another person on the same device.",
+    "next": "Modular game rules, native performance and consistent match outcomes.",
+    "contribution": "I worked on game rules, the Swift module structure, board behavior and QA for captures, promotions, undo and match results.",
+    "lesson": "The satisfying part of a game isn't only how it looks. It's knowing the rules hold up when someone actually plays."
+  }
+]
