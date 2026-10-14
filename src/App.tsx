@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronRight, GitBranch, Menu, X } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronRight, GitBranch, Mail, Menu, X } from "lucide-react";
 import projects from "./projects.json";
 
 type Project = (typeof projects)[number];
 const profileUrl = "https://github.com/rodthenewcomer";
+const contactEmail = "rodadebigni@icloud.com";
+const contactHref = `mailto:${contactEmail}?subject=${encodeURIComponent("Software engineering opportunity")}`;
 const activeYear = "2026";
 
 function Brand({ light = false }: { light?: boolean }) {
@@ -29,7 +31,7 @@ function Header() {
         <Brand />
         <nav className={open ? "nav-links nav-open" : "nav-links"} aria-label="Main navigation" id="primary-navigation">
           {nav.map(item => <Link key={item.label} to={item.to} onClick={() => setOpen(false)}>{item.label}</Link>)}
-          <a className="nav-contact" href={profileUrl} target="_blank" rel="noreferrer">GitHub profile <ArrowUpRight size={15} aria-hidden="true" /></a>
+          <a className="nav-contact" href={contactHref} onClick={() => setOpen(false)}>Email me <Mail size={15} aria-hidden="true" /></a>
         </nav>
         <button className="mobile-toggle" type="button" aria-label={open ? "Close navigation" : "Open navigation"} aria-controls="primary-navigation" aria-expanded={open} onClick={() => setOpen(!open)}>
           {open ? <X size={22} /> : <Menu size={22} />}
@@ -251,7 +253,23 @@ function About() {
   </section>;
 }
 function Contact() {
-  return <section className="contact-wrap" id="contact"><div className="container contact-inner"><div className="contact-top"><span>LET'S WORK TOGETHER</span><CareerBadge text="Open to full-time roles"/></div><div className="contact-main" data-reveal><h2>Let’s make something <em>useful together.</em></h2><p>I’m looking for a long-term software role where I can solve real problems, work with a good team and keep getting better at the craft.</p><a className="button button-light" href={profileUrl} rel="noreferrer" target="_blank">View my GitHub <ArrowUpRight size={19}/></a></div><div className="contact-bottom"><span>UNITED STATES · REMOTE & ON-SITE OPEN</span><span>ENGINEERING · COLLABORATION · QUALITY</span></div></div></section>;
+  return (
+    <section className="contact-wrap" id="contact">
+      <div className="container contact-inner">
+        <div className="contact-top"><span>LET'S WORK TOGETHER</span><CareerBadge text="Open to full-time roles" /></div>
+        <div className="contact-main" data-reveal>
+          <h2>Let’s make something <em>useful together.</em></h2>
+          <p>I’m looking for a long-term software role where I can solve real problems, collaborate with a good team, and keep growing as an engineer. If that sounds like your team, I’d be glad to talk.</p>
+          <div className="contact-actions">
+            <a className="button button-light" href={contactHref}>Email me about a role <Mail size={19} aria-hidden="true" /></a>
+            <a className="contact-github" href={profileUrl} rel="noreferrer" target="_blank">View my GitHub <ArrowUpRight size={18} aria-hidden="true" /></a>
+          </div>
+          <div className="contact-direct"><span>OR WRITE DIRECTLY</span><a className="contact-email" href={`mailto:${contactEmail}`}>{contactEmail}</a></div>
+        </div>
+        <div className="contact-bottom"><span>UNITED STATES · REMOTE & ON-SITE OPEN</span><span>ENGINEERING · COLLABORATION · QUALITY</span></div>
+      </div>
+    </section>
+  );
 }
 function Footer() {
   return <footer className="site-footer"><div className="container footer-content"><Brand/><span>Selected software projects · {activeYear}</span><a href="https://github.com/rodthenewcomer/portfolio" target="_blank" rel="noreferrer" aria-label="View the source code of this portfolio on GitHub" title="Portfolio source code"><GitBranch size={19}/><ArrowUpRight size={14}/></a></div></footer>;
@@ -286,6 +304,7 @@ function ProjectPage() {
     <section id="case-system" className="container case-section case-two-col" data-reveal><div className="case-aside">03 / SYSTEM FLOW</div><div className="case-body"><h2>How the system works</h2><p className="flow-note">Here’s the flow at a glance, without exposing private code.</p><div className="pipeline">{project.flow.map((stage,i)=><div className="pipeline-item" key={stage}><span>{String(i+1).padStart(2,"0")}</span><strong>{stage}</strong>{i<project.flow.length-1&&<ArrowRight size={16} aria-hidden="true"/>}</div>)}</div><div className="case-stack"><span>TOOLS & TECHNOLOGIES</span><div>{project.stack.map(tech=><span key={tech}>{tech}</span>)}</div></div></div></section>
     <section id="case-build" className="container case-section case-two-col" data-reveal><div className="case-aside">04 / BUILD & RESULTS</div><div className="case-body"><h2>What I worked on</h2><p>{project.contribution}</p><div className="case-status"><span className="status-label"><i/> WHAT YOU CAN DO WITH IT</span><p>{project.status}</p></div><div className="case-learning"><span>ONE THING THIS PROJECT TAUGHT ME</span><blockquote>“{project.lesson}”</blockquote></div></div></section>
     <section className="next-project"><div className="container"><span>UP NEXT / {next.number}</span><Link to={"/projects/"+next.slug}><span>{next.name}</span><ArrowUpRight size={32}/></Link></div></section>
+    <Contact />
   </div>;
 }
 
