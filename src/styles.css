@@ -521,3 +521,14 @@ button{border:0}
 @media (prefers-reduced-motion: reduce) {
   .case-jump-links a { transition: none; }
 }
+
+/* Recruiter contact: direct email, clear secondary link and accessible mobile layout. */
+.contact-actions{display:flex;align-items:center;flex-wrap:wrap;gap:24px}
+.contact-github{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:#d7dfdb;min-height:44px;transition:color .2s,gap .2s}
+.contact-github:hover{color:#fff;gap:14px}
+.contact-direct{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-top:31px}
+.contact-direct>span{font-size:10px;font-weight:800;letter-spacing:.12em;color:#b5c3b9}
+.contact-email{display:inline-block;font-size:clamp(16px,2.2vw,21px);font-weight:600;color:#fff;text-decoration:underline;text-decoration-color:#7182e5;text-underline-offset:6px;overflow-wrap:anywhere}
+.contact-email:hover{text-decoration-color:#fff}
+.contact-actions a:focus-visible,.contact-email:focus-visible,.nav-contact:focus-visible{outline:3px solid #8c9ffc;outline-offset:4px}
+@media(max-width:480px){.contact-actions{align-items:stretch;flex-direction:column;gap:13px}.contact-actions .button{width:100%}.contact-github{align-self:flex-start}.contact-direct{margin-top:25px}}
