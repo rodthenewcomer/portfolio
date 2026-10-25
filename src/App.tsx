@@ -132,13 +132,13 @@ function Hero() {
       <div className="hero-grid">
         <div className="hero-copy">
           <div className="hello-note"><span aria-hidden="true">✳</span> HI, I’M MOUSTAPHA.</div>
-          <h1>I build software <span className="serif-italic">that just works.</span></h1>
-          <p className="hero-description">I work on AI tools, web apps and native software. I like untangling tricky problems, connecting the pieces and making the details feel simple.</p>
+          <h1>I turn complex ideas into <span className="serif-italic">working software.</span></h1>
+          <p className="hero-description">Since 2022, I’ve been building AI-powered products, web applications, and native Apple software. I focus on the entire journey—from a real problem to a working, tested experience.</p>
           <div className="hero-actions">
             <Link className="button button-dark" to="/#work">See what I’ve built <ArrowUpRight size={19} aria-hidden="true" /></Link>
             <Link className="text-link" to="/#approach">How I work <ArrowDown size={18} aria-hidden="true" /></Link>
           </div>
-          <div className="hero-footnote"><span className="line-mark" /> <span>Four projects, four different challenges.<br />Here’s the thinking and work behind each one.</span></div>
+          <div className="hero-footnote"><span className="line-mark" /> <span>Independent builder since July 2022.<br />Explore the decisions behind four selected projects.</span></div>
         </div>
         <HeroSystem />
       </div>
@@ -227,7 +227,7 @@ function ProjectCard({ project }: { project: Project }) {
 function Work() {
   return <section className="work-section section-pad container" id="work">
     <SectionLabel index="01">SELECTED WORK</SectionLabel>
-    <div className="section-title-row" data-reveal><div><h2>Four projects.<br/><em>Four good challenges.</em></h2><p>From Mac automation to a checkers game for iPhone. Each one taught me something different about making software that people can use.</p></div><span className="section-count">01 — 04</span></div>
+    <div className="section-title-row" data-reveal><div><h2>Real problems.<br/><em>Thoughtful solutions.</em></h2><p>Four focused case studies across AI agents, analytics, business automation, and iOS. Explore the problems, architecture decisions, integrations, and lessons behind each build.</p></div><span className="section-count">01 — 04</span></div>
     <div className="project-grid">{projects.map(project=><ProjectCard key={project.slug} project={project}/>)}</div>
     <p className="privacy-note"><span className="privacy-icon">i</span> These projects live in private repositories. The case studies share the approach and the work—not private code or credentials.</p>
   </section>;
@@ -236,7 +236,7 @@ function Approach() {
   const steps=[["01","Understand the problem","I start by asking who it’s for and what the software actually needs to do."],["02","Find the moving parts","I break things down into screens, data, APIs and the cases that might go wrong."],["03","Build & connect","AI coding tools help me move faster. I still review the changes and how everything fits together."],["04","Try it for real","I test the complete flow, find what feels off and keep improving it."]];
   return <section className="approach-section section-pad" id="approach"><div className="container">
     <SectionLabel index="02">HOW I WORK</SectionLabel>
-    <div className="approach-heading" data-reveal><h2>Curiosity first.<br/><em>Then the details.</em></h2><p>I’m interested in the whole journey—from figuring out what to build to testing it on an actual device.</p></div>
+    <div className="approach-heading" data-reveal><h2>Curiosity first.<br/><em>Then the details.</em></h2><p>I work from the user problem backward: map the workflow, define the integration points, build with AI-assisted tools, then test real behavior on real devices.</p></div>
     <div className="process-grid">{steps.map(s=><div className="process-step" data-reveal key={s[0]}><span className="process-no">{s[0]}</span><div className="process-icon"><ArrowUpRight size={21}/></div><h3>{s[1]}</h3><p>{s[2]}</p></div>)}</div>
     <div className="process-bottom"><span>MY APPROACH</span><strong>Understand it. Build it. Make it better.</strong><span>STILL LEARNING ↗</span></div>
   </div></section>;
@@ -247,7 +247,7 @@ function About() {
     <div className="about-grid" data-reveal><div><h2>I like figuring<br/><em>things out.</em></h2></div><div className="about-copy">
       <p className="about-lead">I’m Moustapha. I enjoy taking a complicated task and finding a simpler way to get it done.</p>
       <p>I use AI coding tools to help build faster, but I stay close to the work: understanding the code, connecting services, checking what happens when something fails and polishing the experience until it makes sense.</p>
-      <p>I’d like to bring that mindset to a full-time engineering team, learn from people who have been doing this longer than I have and contribute to products over the long run.</p>
+      <p>I’m looking to bring that hands-on product and integration mindset to a long-term engineering team—contributing to useful software, collaborating closely, and continuing to sharpen my technical judgment.</p>
       <div className="about-practice"><span>WHAT I BRING</span><div><strong>React & TypeScript</strong><strong>Swift & SwiftUI</strong><strong>AI integrations</strong><strong>APIs & workflows</strong><strong>Debugging & QA</strong></div></div>
     </div></div>
   </section>;
