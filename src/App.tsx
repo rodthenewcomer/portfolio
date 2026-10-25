@@ -238,7 +238,7 @@ function Approach() {
 function About() {
   return <section className="about-section section-pad container" id="about">
     <SectionLabel index="03">ABOUT THE BUILDER</SectionLabel>
-    <div className="about-grid" data-reveal><div><h2>I like figuring<br/><em>things out.</em></h2></div><div className="about-copy">
+    <div className="about-grid" data-reveal><div className="about-intro"><h2>I like figuring<br/><em>things out.</em></h2><figure className="about-portrait"><img src="/images/moustapha-portrait.jpg" alt="Portrait of Moustapha Adebigni" loading="lazy" decoding="async" width="1254" height="1254" /><figcaption>MOUSTAPHA ADEBIGNI <span>·</span> SOFTWARE DEVELOPER</figcaption></figure></div><div className="about-copy">
       <p className="about-lead">I’m Moustapha. I enjoy taking a complicated task and finding a simpler way to get it done.</p>
       <p>I use AI coding tools to help build faster, but I stay close to the work: understanding the code, connecting services, checking what happens when something fails and polishing the experience until it makes sense.</p>
       <p>I’d like to bring that mindset to a full-time engineering team, learn from people who have been doing this longer than I have and contribute to products over the long run.</p>
