@@ -532,3 +532,13 @@ button{border:0}
 .contact-email:hover{text-decoration-color:#fff}
 .contact-actions a:focus-visible,.contact-email:focus-visible,.nav-contact:focus-visible{outline:3px solid #8c9ffc;outline-offset:4px}
 @media(max-width:480px){.contact-actions{align-items:stretch;flex-direction:column;gap:13px}.contact-actions .button{width:100%}.contact-github{align-self:flex-start}.contact-direct{margin-top:25px}}
+
+/* 2026 recruiter portfolio refinement */
+.project-card{transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,border-color .3s ease;overflow:hidden}
+@media (hover:hover){.project-card:hover{transform:translateY(-5px);box-shadow:0 26px 70px rgba(22,30,28,.12)}}
+.project-card .visual{transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+@media (hover:hover){.project-card:hover .visual{transform:scale(1.012)}}
+.case-visual .visual{box-shadow:0 28px 85px rgba(10,20,28,.10)}
+.case-jump a{min-height:44px;display:inline-flex;align-items:center;gap:8px}
+.project-card:focus-visible,.case-jump a:focus-visible{outline:3px solid #627cff;outline-offset:5px}
+@media (prefers-reduced-motion:reduce){.project-card,.project-card .visual{transition:none!important;transform:none!important}}
