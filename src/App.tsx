@@ -12,7 +12,7 @@ const activeYear = "2026";
 function Brand({ light = false }: { light?: boolean }) {
   return (
     <Link className={light ? "brand brand-light" : "brand"} to="/" aria-label="Moustapha Adebigni, home">
-      <span className="brand-mark" aria-hidden="true">M<span>.</span></span>
+      <span className="brand-mark brand-photo"><img src="/images/moustapha-portrait.jpg" alt="" width="90" height="90" decoding="async" /></span>
       <span className="brand-wordmark"><strong>Moustapha Adebigni</strong><small>Software developer · AI integrations</small></span>
     </Link>
   );
