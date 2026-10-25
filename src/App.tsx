@@ -147,70 +147,64 @@ function Hero() {
   );
 }
 
-function BridgetArt() {
-  return (
-    <div className="visual visual-agent" aria-label="Conceptual example of a Bridget work dashboard">
-      <div className="visual-meta"><span>BRIDGET / WORKSPACE</span><span>MACOS SYSTEM</span></div>
-      <div className="agent-window">
-        <div className="agent-window-top"><div className="window-lights"><i /><i /><i /></div><span>Bridget</span><span className="window-dots">•••</span></div>
-        <div className="agent-window-body">
-          <div className="agent-heading"><span>Work overview</span><small>Illustrative UI</small></div>
-          <div className="agent-tasks">
-            <div className="agent-task"><span className="task-symbol">↗</span><div><strong>Review a proposed plan</strong><small>Approval required</small></div><span className="task-pill pill-amber">Needs you</span></div>
-            <div className="agent-task"><span className="task-symbol">✳</span><div><strong>Analyze session notes</strong><small>Structured workflow</small></div><span className="task-pill pill-blue">Working</span></div>
-            <div className="agent-task"><span className="task-symbol">✓</span><div><strong>Prepare a report</strong><small>Result verified</small></div><span className="task-pill pill-green">Done</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+const projectMedia: Record<string, { hero: string; heroAlt: string; detail: { src: string; alt: string; caption: string }[] }> = {
+  bridget: {
+    hero: "/project-shots/bridget-workspace.webp",
+    heroAlt: "Bridget macOS application showing the daily work brief, tasks and connected services",
+    detail: [
+      { src: "/project-shots/bridget-automation.webp", alt: "Bridget conversation view displaying a flight-watch automation and its controls", caption: "Automations · A work item with schedule, status and controls" },
+    ],
+  },
+  "edge-forensics": {
+    hero: "/project-shots/edge-overview.webp",
+    heroAlt: "Edge Forensics analytics landing page with a sample trading report and risk indicators",
+    detail: [
+      { src: "/project-shots/edge-report.webp", alt: "Example Edge Forensics trading report with performance figures, instrument contribution and risk score", caption: "Example report · Trading metrics, behavioral signals and risk" },
+    ],
+  },
+  "pokou-ai": {
+    hero: "/project-shots/pokou-workflow.webp",
+    heroAlt: "Pokou AI website illustrating a hotel request moving from conversation to action and human exception handling",
+    detail: [],
+  },
+  crown: {
+    hero: "/project-shots/crown-home.webp",
+    heroAlt: "CROWN native iPhone game home screen with dark royal styling",
+    detail: [
+      { src: "/project-shots/crown-match.webp", alt: "CROWN gameplay against AI, shown in the native iPhone simulator", caption: "Native gameplay · AI match" },
+      { src: "/project-shots/crown-analysis.webp", alt: "CROWN match review identifying decision moments and improvement opportunities", caption: "Training · Match analysis and decisions" },
+    ],
+  },
+};
 
-function ForensicsArt() {
-  return (
-    <div className="visual visual-forensics" aria-label="Illustrative trading behavior analysis dashboard">
-      <div className="visual-meta"><span>EDGE FORENSICS / ANALYSIS</span><span>EXAMPLE DATA</span></div>
-      <div className="analytics-screen">
-        <div className="analytics-top"><span className="analytics-small-circle">✳</span><span>Behavior review</span><small>Session patterns</small></div>
-        <div className="analytics-chart"><span className="chart-label">PATTERN FREQUENCY / ILLUSTRATION</span><svg viewBox="0 0 360 130" preserveAspectRatio="none" aria-hidden="true"><path d="M0 101H360 M0 64H360 M0 27H360" stroke="#404746" strokeWidth="1" strokeDasharray="3 7" /><path d="M0 106 C35 92 47 103 70 85 S112 46 143 61 S191 117 214 81 S265 60 288 48 S334 20 360 32" fill="none" stroke="#a9dfbb" strokeWidth="3" strokeLinecap="round" /></svg></div>
-        <div className="analytics-patterns"><div><span className="pattern-dot p-red" />Revenge trading <span>Review</span></div><div><span className="pattern-dot p-gold" />Risk escalation <span>Review</span></div><div><span className="pattern-dot p-green" />Position sizing <span>Analyze</span></div></div>
-      </div>
-    </div>
-  );
-}
-
-function PokouArt() {
-  return (
-    <div className="visual visual-pokou" aria-label="Illustrative customer workflow for Pokou AI">
-      <div className="visual-meta"><span>POKOU / BUSINESS ENGINE</span><span>WORKFLOW EXAMPLE</span></div>
-      <div className="pokou-flow">
-        <div className="pokou-request"><span>01 / CUSTOMER MESSAGE</span><p>“Do you have a room available this weekend?”</p></div>
-        <div className="pokou-flow-line"><span className="flow-node" /> <span>UNDERSTAND & ROUTE</span></div>
-        <div className="pokou-steps"><div><b>02</b><strong>Check rules</strong><small>Hotel module</small></div><div><b>03</b><strong>Take action</strong><small>Booking workflow</small></div><div><b>04</b><strong>Confirm</strong><small>Or hand off</small></div></div>
-        <div className="pokou-foot"><span className="status-light" />Human context preserved when needed</div>
-      </div>
-    </div>
-  );
-}
-
-function CrownArt() {
-  const pieces = new Set([1,3,5,7,8,10,12,14,17,19,21,23,40,42,44,46,49,51,53,55,56,58,60,62]);
-  return (
-    <div className="visual visual-crown" aria-label="Illustration of an eight by eight checkers board">
-      <div className="visual-meta"><span>CROWN / GAMECORE</span><span>SWIFT + SPRITEKIT</span></div>
-      <div className="board-scene">
-        <div className="game-board" aria-hidden="true">{Array.from({length:64},(_,i)=>{const dark=(Math.floor(i/8)+i%8)%2===1;const hasPiece=pieces.has(i);return <span key={i} className={dark?"board-cell board-dark":"board-cell board-light"}>{hasPiece&&<span className={i<32?"piece piece-cream":"piece piece-dark"} />}</span>;})}</div>
-        <div className="board-aside"><span className="board-aside-line">SELECT A RULESET</span><strong>Precision<br />in every<br />move.</strong><span className="rules-badge">FOUR VARIANTS</span><span className="board-caption">Board display / illustrative</span></div>
-      </div>
-    </div>
-  );
-}
 function ProjectVisual({ project }: { project: Project }) {
-  if(project.type==="agent")return <BridgetArt/>;
-  if(project.type==="analytics")return <ForensicsArt/>;
-  if(project.type==="business")return <PokouArt/>;
-  return <CrownArt/>;
+  const media = projectMedia[project.slug];
+  if (!media) return null;
+  return (
+    <figure className={"project-photo project-photo-" + project.type}>
+      <img src={media.hero} alt={media.heroAlt} loading="lazy" decoding="async" />
+      <figcaption><span>{project.name.toUpperCase()} / PRODUCT VIEW</span><span>{project.type === "analytics" ? "SAMPLE DATA" : "PROJECT SCREENSHOT"}</span></figcaption>
+    </figure>
+  );
 }
+function ProjectGallery({ project }: { project: Project }) {
+  const media = projectMedia[project.slug];
+  if (!media?.detail.length) return null;
+  return (
+    <section className="container project-gallery" aria-label={project.name + " product screenshots"}>
+      <div className="project-gallery-heading"><span>INSIDE THE PRODUCT</span><h2>See the work <em>up close.</em></h2><p>Selected screens from the application and its product experience.</p></div>
+      <div className={"project-gallery-grid project-gallery-" + project.type}>
+        {media.detail.map(image => (
+          <figure key={image.src}>
+            <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+            <figcaption>{image.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function SectionLabel({ index, children }: { index:string; children:React.ReactNode }) {
   return <div className="section-label"><span>{index}</span><span>{children}</span></div>;
 }
@@ -289,6 +283,7 @@ function ProjectPage() {
     <ReadingProgress />
     <div className="container case-intro"><Link className="back-link" to="/#work"><ArrowLeft size={17}/> All selected work</Link><div className="case-kicker"><span>{project.number} / CASE STUDY</span><span>{project.discipline}</span></div><div className="case-headline" data-reveal><h1>{project.headline}</h1><p>{project.summary}</p></div></div>
     <div className="container case-visual"><ProjectVisual project={project}/></div>
+    <ProjectGallery project={project}/>
     <div className="container case-facts">{project.facts.map(f=><div key={f[1]}><strong>{f[0]}</strong><span>{f[1]}</span></div>)}<div className="case-fact-type"><span>PROJECT</span><strong>{project.name}</strong></div></div>
     <nav className="container case-jump" aria-label="Case study sections">
       <span className="case-jump-label">JUMP TO THE DETAILS</span>
