@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import projects from "./projects.json";
 import site from "./site.json";
-import { contactEmail, copy, profileUrl } from "./copy";
+import { contactEmail, copy, portfolioRepoUrl } from "./copy";
 import {
   LanguageContext, localizedPath, publicSite, readPreference, savePreference, useLanguage,
 } from "./language";
@@ -251,7 +251,7 @@ function Contact() {
         <div><h2 id="contact-title">{text.contactTitle}</h2><p>{text.contactBody}</p></div>
         <div className="actions">
           <a className="button button-light" href={`mailto:${contactEmail}?subject=${encodeURIComponent(text.subject)}`}><Mail size={18} /> {contactEmail}</a>
-          <a className="button button-ghost" href={profileUrl} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={17} /></a>
+          <a className="button button-ghost" href={portfolioRepoUrl} target="_blank" rel="noreferrer">{text.portfolioCode} <ArrowUpRight size={17} /></a>
         </div>
       </div>
     </section>
@@ -264,7 +264,7 @@ function Footer() {
     <footer className="footer">
       <div className="container footer-inner">
         <Brand />
-        <a href={profileUrl + "/portfolio"} target="_blank" rel="noreferrer">{text.footerCode} <ArrowUpRight size={16} /></a>
+        <a href={portfolioRepoUrl} target="_blank" rel="noreferrer">{text.portfolioCode} <ArrowUpRight size={16} /></a>
       </div>
     </footer>
   );
@@ -286,6 +286,7 @@ function ProjectPage({ project }: { project: Project }) {
           <p className="case-headline">{content.headline}</p>
           <p className="case-summary">{content.summary}</p>
           <Stack items={project.stack} />
+          <p className="case-source">{text.sourceStatus}</p>
           {project.publicUrl && content.publicLabel && (
             <a className="button button-outline case-public" href={project.publicUrl} target="_blank" rel="noreferrer">
               {content.publicLabel} <ArrowUpRight size={17} />

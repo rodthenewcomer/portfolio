@@ -145,6 +145,7 @@ main:focus { outline: none; }
 .case-intro .category span { border-left: 1px solid #a7b5aa; margin-left: 8px; padding-left: 11px; }
 .case-intro h1, .not-found h1 { font: 400 clamp(4.25rem, 9vw, 9rem)/.91 var(--serif); letter-spacing: -.044em; margin: 13px 0; }
 .case-headline { margin-top: 16px; font-size: clamp(1.39rem, 2.7vw, 2.5rem); font-weight: 600; letter-spacing: -.045em; line-height: 1.17; }
+.case-source { margin-top: 13px; color: var(--muted); font-size: .89rem; }
 .case-public { margin-top: 19px; }
 .case-summary { color: var(--muted); max-width: 62ch; margin-top: 16px; font-size: 1.08rem; }
 .case-visual .screenshot-mat img { width: min(100%, 1050px); }

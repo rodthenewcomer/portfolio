@@ -25,4 +25,4 @@ npm run preview
 
 French is the default for URLs without a language prefix. The FR/EN switch saves a preference on this browser. Explicit `/fr/` and `/en/` links always open in the specified language. Existing unprefixed home and project URLs still open the corresponding page.
 
-Edit site copy in `src/copy.ts`, case studies in `src/projects.json`, and home metadata in `src/site.json`. The build generates localized metadata and a sitemap in `dist/`. The product repositories are private. Screenshots are captioned with their context, including sample-data and product-page examples.
+Edit site copy in `src/copy.ts`, case studies in `src/projects.json`, and home metadata in `src/site.json`. The build generates localized metadata and a sitemap in `dist/`. This repository contains the public portfolio website. The four application repositories are private. The Pokou AI and Edge Forensics case studies link to their public product site and demo, respectively. Screenshots are captioned with their context, including sample-data and product-page examples.
