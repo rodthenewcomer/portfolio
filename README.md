@@ -9,7 +9,6 @@ Portfolio bilingue de développement indépendant en TypeScript, React et IA. Le
 | Pokou AI | [/fr/projects/pokou-ai](https://moustapha-adebigni.vercel.app/fr/projects/pokou-ai) | [/en/projects/pokou-ai](https://moustapha-adebigni.vercel.app/en/projects/pokou-ai) |
 | Edge Forensics | [/fr/projects/edge-forensics](https://moustapha-adebigni.vercel.app/fr/projects/edge-forensics) | [/en/projects/edge-forensics](https://moustapha-adebigni.vercel.app/en/projects/edge-forensics) |
 | Bridget | [/fr/projects/bridget](https://moustapha-adebigni.vercel.app/fr/projects/bridget) | [/en/projects/bridget](https://moustapha-adebigni.vercel.app/en/projects/bridget) |
-| CROWN | [/fr/projects/crown](https://moustapha-adebigni.vercel.app/fr/projects/crown) | [/en/projects/crown](https://moustapha-adebigni.vercel.app/en/projects/crown) |
 
 ## Run locally
 
@@ -25,4 +24,4 @@ npm run preview
 
 French is the default for URLs without a language prefix. The FR/EN switch saves a preference on this browser. Explicit `/fr/` and `/en/` links always open in the specified language. Existing unprefixed home and project URLs still open the corresponding page.
 
-Edit site copy in `src/copy.ts`, case studies in `src/projects.json`, and home metadata in `src/site.json`. The build generates localized metadata and a sitemap in `dist/`. This repository contains the public portfolio website. The four application repositories are private. The Pokou AI and Edge Forensics case studies link to their public product site and demo, respectively. Screenshots are captioned with their context, including sample-data and product-page examples.
+Edit site copy in `src/copy.ts`, case studies in `src/projects.json`, and home metadata in `src/site.json`. The build generates localized metadata and a sitemap in `dist/`. This repository contains the public portfolio website. The repos for the featured applications are private. The Pokou AI and Edge Forensics case studies link to their public product site and demo, respectively. Screenshots are captioned with their context, including sample-data and product-page examples.

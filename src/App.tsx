@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, matchPath, Navigate, useLocation } from "react-router-dom";
 import {
   ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ClipboardCheck, Code2,
-  GitBranch, Mail, MapPin, Menu, X,
+  ListChecks, Mail, MapPin, Menu, Search, X,
 } from "lucide-react";
 import projects from "./projects.json";
 import site from "./site.json";
@@ -17,7 +17,7 @@ type Screenshot = Project["hero"];
 
 const sectionIds = ["work", "approach", "about"];
 const caseIds = ["case-problem", "case-decisions", "case-system", "case-build"];
-const stepIcons = [ClipboardCheck, Code2, GitBranch];
+const stepIcons = [Search, ListChecks, Code2, ClipboardCheck];
 
 function Brand() {
   const language = useLanguage();
@@ -195,11 +195,7 @@ function Work() {
         <p>{text.workIntro}</p>
       </div>
       <div className="project-grid">
-        {projects.slice(0, 3).map((project, index) => <ProjectCard key={project.slug} project={project} featured={index === 0} />)}
-      </div>
-      <div className="other-project">
-        <div><p className="category">{text.moreWork}</p><h3>CROWN</h3><p>{projects[3][language].summary}</p></div>
-        <Link className="button button-outline" to={localizedPath(language, "/projects/crown")}>{text.readCase} <ArrowUpRight size={17} /></Link>
+        {projects.map((project, index) => <ProjectCard key={project.slug} project={project} featured={index === 0} />)}
       </div>
     </section>
   );

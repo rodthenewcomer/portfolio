@@ -11,7 +11,7 @@ export const copy = {
     role: "Développeur full stack",
     specialty: "TypeScript, React et agents IA",
     hero: ["Logiciels métier", "et agents IA"],
-    intro: "Je développe des applications de bout en bout, du parcours utilisateur aux API et aux données. J’utilise des agents de programmation et je vérifie leurs changements dans l’application.",
+    intro: "Je conçois et développe des applications web et Mac. Je pars d’un besoin concret, je choisis comment le logiciel doit y répondre et je vérifie le résultat dans l’application.",
     location: "Elkridge, Maryland, États-Unis",
     portrait: "Portrait de Moustapha Adebigni",
     seeWork: "Voir les projets",
@@ -20,23 +20,23 @@ export const copy = {
     studies: "Études de cas",
     workIntro: "Trois projets indépendants, chacun présenté par le problème, les choix techniques et la façon dont j’ai vérifié le parcours.",
     readCase: "Lire l’étude de cas",
-    moreWork: "Autre projet",
-    method: "Travailler avec les agents",
-    methodIntro: "Je confie des tâches précises aux agents de programmation. Je vérifie leurs changements dans Git et je décide de ce qui est prêt à être intégré.",
+    method: "Du besoin à la mise en ligne",
+    methodIntro: "Je commence par comprendre le problème et définir ce que l’utilisateur doit pouvoir faire. Ce résultat guide l’architecture, la documentation, les tests et les décisions de mise en ligne.",
     steps: [
-      ["Cadrer la tâche", "Je définis le parcours, les cas d’erreur et le résultat attendu avant de lancer l’implémentation."],
-      ["Relire le code", "J’examine le diff dans Git et je vérifie les effets sur les API, les données et les permissions."],
-      ["Tester le parcours", "Je reproduis les erreurs et je teste le flux complet avant d’accepter une correction."]
+      ["Comprendre et concevoir", "Je décris le parcours utilisateur et les cas où il peut échouer. Je décide du rôle de l’interface, des API et des données avant de découper le travail."],
+      ["Documenter et préparer les tests", "Je consigne les choix techniques et les critères d’acceptation. Avant de coder, je prépare les scénarios de test qui couvrent le parcours principal et les erreurs possibles."],
+      ["Développer par étapes", "Claude Code et Codex m’aident à explorer le code et à mettre en œuvre les changements. Je décide de l’architecture, j’examine les propositions et j’ajuste le code pendant l’intégration."],
+      ["Valider et livrer", "Je teste le parcours complet et les fonctionnalités que le changement pourrait affecter. Je corrige les écarts, puis je vérifie le résultat sur la version déployée."]
     ],
     about: "À propos",
     independent: "Développement indépendant depuis juillet 2022",
-    aboutText: "Je conçois des projets personnels pour le web, macOS et iOS. Une même question guide mon travail sur ces plateformes : comment vérifier ce que le logiciel fait, y compris quand une étape échoue ?",
+    aboutText: "Je construis des applications où plusieurs éléments doivent fonctionner ensemble. Avec Pokou AI, une demande peut passer d’une conversation à un service externe, puis à une personne. Avec Bridget, l’utilisateur doit pouvoir suivre les étapes et comprendre où une tâche s’est arrêtée.",
     aboutCareer: "Je souhaite rejoindre une équipe de développement sur le long terme et contribuer à des produits qui intègrent l’IA aux opérations métier.",
     skills: "Technologies et méthodes",
     skillGroups: [
       ["Web et données", "TypeScript, React, Next.js, Fastify, REST, PostgreSQL, Supabase, Redis"],
       ["IA et automatisation", "Agents de programmation, API OpenAI et Claude, appels d’outils, validation humaine"],
-      ["Qualité et livraison", "Git/GitHub, revue de code, débogage, tests fonctionnels, Vercel, Railway"]
+      ["Qualité et livraison", "Documentation technique, Git/GitHub, tests fonctionnels et de régression, Vercel, Railway"]
     ],
     contactTitle: "Parlons de votre projet",
     contactBody: "Je suis ouvert aux postes à temps plein, y compris à distance. Vous pouvez me joindre en français ou en anglais.",
@@ -68,7 +68,7 @@ export const copy = {
     role: "Full-stack developer",
     specialty: "TypeScript, React and AI agents",
     hero: ["Business software", "and AI agents"],
-    intro: "I build applications end to end, from the user journey to APIs and data. I use coding agents and verify their changes in the application.",
+    intro: "I design and build web and Mac applications. I start with a real problem, decide how the software should solve it, and verify the result in the application.",
     location: "Elkridge, Maryland, United States",
     portrait: "Portrait of Moustapha Adebigni",
     seeWork: "View projects",
@@ -77,23 +77,23 @@ export const copy = {
     studies: "Case studies",
     workIntro: "Three independent projects, with a look at the problem, the engineering choices and how I checked that the workflow worked.",
     readCase: "Read the case study",
-    moreWork: "Another project",
-    method: "How I work with agents",
-    methodIntro: "I give coding agents well-defined tasks. I review their changes in Git and decide what is ready to integrate.",
+    method: "From product need to release",
+    methodIntro: "I start by understanding the problem and defining what the user needs to be able to do. That outcome guides the architecture, documentation, tests, and release decisions.",
     steps: [
-      ["Define the task", "I map the workflow, failure cases and expected result before starting implementation."],
-      ["Review the code", "I inspect the Git diff and check the impact on APIs, data and permissions."],
-      ["Test the workflow", "I reproduce failures and test the full flow before accepting a fix."]
+      ["Understand and design", "I map the user journey and where it can fail. I decide what belongs in the interface, APIs, and data layer before breaking down the work."],
+      ["Document and plan tests", "I record technical decisions and acceptance criteria. Before coding, I prepare test scenarios for the main workflow and the ways it can fail."],
+      ["Build in stages", "Claude Code and Codex help me explore the codebase and implement changes. I make the architectural decisions, review proposals, and refine the code as I integrate it."],
+      ["Validate and release", "I test the complete workflow and the features a change might affect. I fix discrepancies and verify the result on the deployed version."]
     ],
     about: "About",
     independent: "Independent development since July 2022",
-    aboutText: "I build personal projects for the web, macOS and iOS. One question guides my work across those platforms: how can I verify what the software does, including when a step fails?",
+    aboutText: "I build applications that need several moving parts to work together. In Pokou AI, a request can move from a conversation to an external service and then to a person. In Bridget, users need to follow the steps and see where a task stopped.",
     aboutCareer: "I’m looking to join an engineering team for the long term and contribute to products that bring AI into business operations.",
     skills: "Technologies and methods",
     skillGroups: [
       ["Web and data", "TypeScript, React, Next.js, Fastify, REST, PostgreSQL, Supabase, Redis"],
       ["AI and automation", "Coding agents, OpenAI and Claude APIs, tool calling, human approval"],
-      ["Quality and delivery", "Git/GitHub, code review, debugging, functional tests, Vercel, Railway"]
+      ["Quality and delivery", "Technical documentation, Git/GitHub, functional and regression tests, Vercel, Railway"]
     ],
     contactTitle: "Let’s talk about your project",
     contactBody: "I’m open to full-time roles, including remote work. You can reach me in French or English.",
