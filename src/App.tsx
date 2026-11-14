@@ -23,7 +23,7 @@ function Brand() {
   const language = useLanguage();
   return (
     <Link className="brand" to={localizedPath(language)} aria-label={`Moustapha Adebigni · ${copy[language].home}`}>
-      <span className="brand-mark" aria-hidden="true">MA</span>
+      <span className="brand-mark" aria-hidden="true" />
       <span>Moustapha Adebigni</span>
     </Link>
   );
@@ -44,7 +44,7 @@ function LanguageSwitch({ path }: { path: string }) {
           to={localizedPath(code, path) + search + hash}
           lang={code}
           hrefLang={code}
-          aria-label={label}
+          aria-label={code.toUpperCase() + " · " + label}
           aria-current={language === code ? "true" : undefined}
           onClick={() => savePreference(code)}
         >{code.toUpperCase()}</Link>

@@ -37,6 +37,7 @@ main:focus { outline: none; }
   width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid #9baea0;
   border-radius: 50%; font: 400 1.2rem/1 var(--serif); letter-spacing: -.05em; color: var(--accent);
 }
+.brand-mark::before { content: "MA" / ""; }
 .main-nav, .header-tools, .language-switch { display: flex; align-items: center; }
 .main-nav { gap: clamp(16px, 3vw, 42px); font-size: .89rem; font-weight: 600; }
 .main-nav a { display: inline-flex; align-items: center; min-height: 44px; }
