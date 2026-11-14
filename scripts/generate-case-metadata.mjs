@@ -1,43 +1,53 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-// Produce route-specific HTML metadata while keeping the application a client-rendered SPA.
-// Social crawlers generally read the original HTML rather than waiting for React effects.
 const host = "https://moustapha-adebigni.vercel.app";
 const template = readFileSync("dist/index.html", "utf8");
 const projects = JSON.parse(readFileSync("src/projects.json", "utf8"));
+const site = JSON.parse(readFileSync("src/site.json", "utf8"));
+const languages = ["fr", "en"];
+const routes = [{ path: "/" }, ...projects.map(project => ({ path: "/projects/" + project.slug, project }))];
+const sitemap = [];
 
-function escapeAttribute(value) {
-  return String(value).replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
+function escapeHtml(value) {
+  return value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
 }
 
-function replaceOne(html, pattern, replacement, name) {
-  const matches = html.match(new RegExp(pattern.source, "g"));
-  if (matches?.length !== 1) throw new Error("Expected exactly one " + name + " element");
-  return html.replace(pattern, replacement);
+function replaceOne(html, pattern, value) {
+  if (!pattern.test(html)) throw new Error("Missing metadata: " + pattern);
+  return html.replace(pattern, (_, opening, closing) => opening + escapeHtml(value) + closing);
 }
 
-for (const project of projects) {
-  const url = host + "/projects/" + project.slug;
-  const title = project.name + " — " + project.headline + " | Moustapha Adebigni";
-  const description = project.summary;
-  let html = template;
-  html = replaceOne(html, /<title>[^<]*<\/title>/, "<title>" + escapeAttribute(title) + "</title>", "title");
-  html = replaceOne(html, /(<meta name="description" content=")[^"]*(")/, "$1" + escapeAttribute(description) + "$2", "description");
-  html = replaceOne(html, /(<link rel="canonical" href=")[^"]*(")/, "$1" + escapeAttribute(url) + "$2", "canonical");
-  html = replaceOne(html, /(<meta property="og:url" content=")[^"]*(")/, "$1" + escapeAttribute(url) + "$2", "og:url");
-  html = replaceOne(html, /(<meta property="og:title" content=")[^"]*(")/, "$1" + escapeAttribute(title) + "$2", "og:title");
-  html = replaceOne(html, /(<meta property="og:description" content=")[^"]*(")/, "$1" + escapeAttribute(description) + "$2", "og:description");
-  html = replaceOne(html, /(<meta property="og:type" content=")[^"]*(")/, "$1article$2", "og:type");
-  html = replaceOne(
-    html,
-    /<\/head>/,
-    '<meta name="twitter:title" content="' + escapeAttribute(title) + '" />\n' +
-      '<meta name="twitter:description" content="' + escapeAttribute(description) + '" />\n</head>',
-    "head",
-  );
-  const directory = join("dist", "projects", project.slug);
-  mkdirSync(directory, { recursive: true });
-  writeFileSync(join(directory, "index.html"), html, "utf8");
-  console.log("Generated SEO metadata:", "/projects/" + project.slug);
+for (const language of languages) {
+  for (const { path, project } of routes) {
+    const url = host + "/" + language + path;
+    const label = language === "fr" ? "Étude de cas" : "Case study";
+    const title = project ? project.name + " | " + label + " · Moustapha Adebigni" : site[language].title;
+    const description = project?.[language].summary ?? site[language].description;
+    let html = replaceOne(template, /(<html lang=")[^"]*(")/, language);
+    html = replaceOne(html, /(<title>)[^<]*(<\/title>)/, title);
+    html = replaceOne(html, /(<link rel="canonical" href=")[^"]*(")/, url);
+    html = replaceOne(html, /(<link rel="alternate" hreflang="fr" href=")[^"]*(")/, host + "/fr" + path);
+    html = replaceOne(html, /(<link rel="alternate" hreflang="en" href=")[^"]*(")/, host + "/en" + path);
+    html = replaceOne(html, /(<meta name="description" content=")[^"]*(")/, description);
+    html = replaceOne(html, /(<meta property="og:description" content=")[^"]*(")/, description);
+    html = replaceOne(html, /(<meta property="og:url" content=")[^"]*(")/, url);
+    html = replaceOne(html, /(<meta property="og:title" content=")[^"]*(")/, title);
+    html = replaceOne(html, /(<meta property="og:type" content=")[^"]*(")/, project ? "article" : "website");
+    html = replaceOne(html, /(<meta property="og:image" content=")[^"]*(")/, host + (language === "fr" ? "/og-preview.png" : "/og-preview-en.png"));
+    html = replaceOne(html, /(<meta property="og:image:alt" content=")[^"]*(")/, title);
+    const directory = join("dist", language, path);
+    mkdirSync(directory, { recursive: true });
+    writeFileSync(join(directory, "index.html"), html);
+    sitemap.push("  <url><loc>" + url + "</loc></url>");
+    if (language === "fr") {
+      // Existing unprefixed URLs retain their metadata and redirect in the app.
+      const legacyDirectory = join("dist", path);
+      mkdirSync(legacyDirectory, { recursive: true });
+      writeFileSync(join(legacyDirectory, "index.html"), html);
+    }
+  }
 }
+
+const xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+writeFileSync("dist/sitemap.xml", xml + sitemap.join("\n") + "\n</urlset>\n");
