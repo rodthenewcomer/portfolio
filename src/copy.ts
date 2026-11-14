@@ -40,7 +40,8 @@ export const copy = {
     ],
     contactTitle: "Parlons de votre projet",
     contactBody: "Je suis ouvert aux postes à temps plein, y compris à distance. Vous pouvez me joindre en français ou en anglais.",
-    footerCode: "Code du portfolio sur GitHub",
+    portfolioCode: "Code du portfolio sur GitHub",
+    sourceStatus: "Le code source de cette application est privé.",
     back: "Tous les projets",
     study: "Étude de cas",
     jump: "Dans cette étude",
@@ -96,7 +97,8 @@ export const copy = {
     ],
     contactTitle: "Let’s talk about your project",
     contactBody: "I’m open to full-time roles, including remote work. You can reach me in French or English.",
-    footerCode: "Portfolio source code on GitHub",
+    portfolioCode: "Portfolio source code on GitHub",
+    sourceStatus: "This application’s source code is private.",
     back: "All projects",
     study: "Case study",
     jump: "In this case study",
@@ -114,4 +116,4 @@ export const copy = {
 };
 
 export const contactEmail = "rodadebigni@icloud.com";
-export const profileUrl = "https://github.com/rodthenewcomer";
+export const portfolioRepoUrl = "https://github.com/rodthenewcomer/portfolio";
