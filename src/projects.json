@@ -133,52 +133,5 @@
       "verification": "I reproduced failed actions and looked at the integration boundaries and macOS task states to find where the workflow was getting stuck.",
       "scope": "This case study covers the macOS task workflow, tracking and permissions. The gallery shows the controls for a scheduled watch."
     }
-  },
-  {
-    "slug": "crown",
-    "name": "CROWN",
-    "theme": "game",
-    "stack": ["Swift 6", "SwiftUI", "SpriteKit", "GameCore"],
-    "hero": { "file": "crown-home.webp", "width": 760, "height": 1653 },
-    "gallery": [
-      { "file": "crown-match.webp", "width": 760, "height": 1653 },
-      { "file": "crown-analysis.webp", "width": 760, "height": 1653 }
-    ],
-    "fr": {
-      "category": "Jeu natif sur iPhone",
-      "headline": "Un moteur de règles indépendant du plateau",
-      "summary": "Un jeu de dames natif sur iPhone qui prend en charge quatre variantes et des parties complètes hors ligne.",
-      "heroAlt": "Écran d’accueil du jeu de dames CROWN sur iPhone",
-      "heroCaption": "Écran d’accueil du jeu sur iPhone",
-      "galleryText": [["Partie de dames contre l’ordinateur dans le simulateur iPhone", "Partie contre l’ordinateur"], ["Écran CROWN de revue d’une partie", "Revue des décisions prises pendant la partie"]],
-      "challenge": "Les prises, les promotions et les conditions de victoire varient selon les règles choisies. L’interface doit refléter ces différences pendant toute la partie.",
-      "contribution": "J’ai séparé les règles dans un moteur Swift. SpriteKit affiche le plateau et SwiftUI gère la navigation et les autres écrans.",
-      "decisions": [
-        ["Centraliser les règles", "GameCore détermine les coups autorisés et l’issue de la partie. Le plateau affiche l’état calculé par le moteur."],
-        ["Séparer affichage et interactions", "SpriteKit gère le plateau interactif et SwiftUI prend en charge les menus et la navigation."],
-        ["Tester la partie complète", "Le parcours de test va du choix de la variante jusqu’au résultat et à la relance d’une partie."]
-      ],
-      "flow": ["Choix des règles", "Configuration", "Moteur GameCore", "Plateau SpriteKit", "Résultat"],
-      "verification": "J’ai vérifié les coups autorisés, les prises, les promotions, l’annulation et les fins de partie dans le parcours hors ligne.",
-      "scope": "Quatre variantes sur des plateaux 8 × 8 et 10 × 10, en partie locale ou contre l’ordinateur."
-    },
-    "en": {
-      "category": "Native iPhone game",
-      "headline": "A rules engine independent of the board",
-      "summary": "A native iPhone checkers game with four rulesets and complete offline matches.",
-      "heroAlt": "Home screen of the CROWN checkers game for iPhone",
-      "heroCaption": "iPhone game home screen",
-      "galleryText": [["Checkers match against the computer in the iPhone simulator", "Match against the computer"], ["CROWN match review screen", "Reviewing decisions made during the match"]],
-      "challenge": "Captures, promotions and winning conditions vary by ruleset. The interface needs to reflect those differences throughout a match.",
-      "contribution": "I separated the rules into a Swift engine. SpriteKit renders the board, and SwiftUI handles navigation and the other screens.",
-      "decisions": [
-        ["Keep the rules in one place", "GameCore determines legal moves and match outcomes. The board displays the state calculated by the engine."],
-        ["Separate rendering and navigation", "SpriteKit handles the interactive board and SwiftUI handles menus and navigation."],
-        ["Test the whole match", "The test flow starts with ruleset selection and continues through the result and restart."]
-      ],
-      "flow": ["Select rules", "Match setup", "GameCore engine", "SpriteKit board", "Result"],
-      "verification": "I verified legal moves, captures, promotions, undo and game outcomes in the offline match flow.",
-      "scope": "Four rulesets on 8 × 8 and 10 × 10 boards, with local matches or a computer opponent."
-    }
   }
 ]
