@@ -1,29 +1,21 @@
-# Moustapha Adebigni — Software Developer & AI Integrations
+# Moustapha Adebigni — Portfolio
 
-**[Explore the live portfolio](https://moustapha-adebigni.vercel.app)**
+[Voir le site / Visit the site](https://moustapha-adebigni.vercel.app/)
 
-I like building useful software and figuring out how the pieces fit together. This portfolio takes a closer look at four projects I've worked on:
+Portfolio bilingue de développement indépendant en TypeScript, React et IA. Les études présentent le contexte, les choix techniques, la contribution personnelle et les vérifications effectuées.
 
-- **Bridget** — a native Mac workspace for AI agents, approved actions and task tracking.
-- **Edge Forensics** — trading-history analysis with calculated metrics and AI-assisted behavioral feedback.
-- **Pokou AI** — customer conversations connected to business workflows and human handoffs.
-- **CROWN** — a native iPhone checkers game with four playable rulesets and a modular Swift engine.
+| Étude / Case study | Français | English |
+| --- | --- | --- |
+| Pokou AI | [/fr/projects/pokou-ai](https://moustapha-adebigni.vercel.app/fr/projects/pokou-ai) | [/en/projects/pokou-ai](https://moustapha-adebigni.vercel.app/en/projects/pokou-ai) |
+| Edge Forensics | [/fr/projects/edge-forensics](https://moustapha-adebigni.vercel.app/fr/projects/edge-forensics) | [/en/projects/edge-forensics](https://moustapha-adebigni.vercel.app/en/projects/edge-forensics) |
+| Bridget | [/fr/projects/bridget](https://moustapha-adebigni.vercel.app/fr/projects/bridget) | [/en/projects/bridget](https://moustapha-adebigni.vercel.app/en/projects/bridget) |
+| CROWN | [/fr/projects/crown](https://moustapha-adebigni.vercel.app/fr/projects/crown) | [/en/projects/crown](https://moustapha-adebigni.vercel.app/en/projects/crown) |
 
-Each case study explains the problem, the technical choices and what the software does. These are privately developed applications, so the site uses its own illustrative visuals rather than exposing proprietary code or confidential data.
+## Run locally
 
-## The portfolio itself
+Use Node.js 22. The portfolio uses React, TypeScript, Vite and React Router.
 
-I built this site with **React, TypeScript, Vite and React Router**, plus a custom responsive design system. No page template, stock photography or gradients.
-
-A few details I cared about: readable typography, clean layouts at small screen sizes, keyboard navigation, reduced-motion support, quiet animations and honest project descriptions.
-
-The portfolio passed automated desktop and mobile accessibility checks against WCAG 2.1 AA rules.
-
-## Run it locally
-
-You'll need Node.js 22 or newer.
-
-```bash
+```sh
 npm ci
 npm run dev
 npm run lint
@@ -31,21 +23,6 @@ npm run build
 npm run preview
 ```
 
-The production build goes to `dist/`. Vercel handles deep links for the four case-study routes.
+French is the default for URLs without a language prefix. The FR/EN switch saves a preference on this browser. Explicit `/fr/` and `/en/` links always open in the specified language. Existing unprefixed home and project URLs still open the corresponding page.
 
-## Updating the project content
-
-The written project information lives in `src/projects.json`.
-
-| Case study | Route |
-| --- | --- |
-| Bridget | `/projects/bridget` |
-| Edge Forensics | `/projects/edge-forensics` |
-| Pokou AI | `/projects/pokou-ai` |
-| CROWN | `/projects/crown` |
-
-**A note on the visuals:** the product illustrations are explanatory mockups, not screenshots of live user data. The underlying product repositories stay private.
-
----
-
-Looking for a software development role where I can help build useful products, work with a team and keep growing.
+Edit site copy in `src/copy.ts`, case studies in `src/projects.json`, and home metadata in `src/site.json`. The build generates localized metadata and a sitemap in `dist/`. The product repositories are private. Screenshots are captioned with their context, including sample-data and product-page examples.

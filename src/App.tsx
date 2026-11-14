@@ -1,308 +1,386 @@
-import { useEffect, useRef, useState } from "react";
-import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronRight, GitBranch, Mail, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, matchPath, Navigate, useLocation } from "react-router-dom";
+import {
+  ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ClipboardCheck, Code2,
+  GitBranch, Mail, MapPin, Menu, X,
+} from "lucide-react";
 import projects from "./projects.json";
+import site from "./site.json";
+import { contactEmail, copy, profileUrl } from "./copy";
+import {
+  LanguageContext, localizedPath, publicSite, readPreference, savePreference, useLanguage,
+} from "./language";
+import type { Language } from "./language";
 
 type Project = (typeof projects)[number];
-const profileUrl = "https://github.com/rodthenewcomer";
-const contactEmail = "rodadebigni@icloud.com";
-const contactHref = `mailto:${contactEmail}?subject=${encodeURIComponent("Software engineering opportunity")}`;
-const activeYear = "2026";
+type Screenshot = Project["hero"];
 
-function Brand({ light = false }: { light?: boolean }) {
+const sectionIds = ["work", "approach", "about"];
+const caseIds = ["case-problem", "case-decisions", "case-system", "case-build"];
+const stepIcons = [ClipboardCheck, Code2, GitBranch];
+
+function Brand() {
+  const language = useLanguage();
   return (
-    <Link className={light ? "brand brand-light" : "brand"} to="/" aria-label="Moustapha Adebigni, home">
-      <span className="brand-mark brand-photo"><img src="/images/moustapha-portrait.jpg" alt="" width="90" height="90" decoding="async" /></span>
-      <span className="brand-wordmark"><strong>Moustapha Adebigni</strong><small>Software developer · AI integrations</small></span>
+    <Link className="brand" to={localizedPath(language)} aria-label={`Moustapha Adebigni · ${copy[language].home}`}>
+      <span className="brand-mark" aria-hidden="true" />
+      <span>Moustapha Adebigni</span>
     </Link>
   );
 }
 
-function Header() {
-  const [open, setOpen] = useState(false);
-  const nav = [
-    { label: "Selected work", to: "/#work" },
-    { label: "My approach", to: "/#approach" },
-    { label: "About", to: "/#about" },
-  ];
+function LanguageSwitch({ path }: { path: string }) {
+  const language = useLanguage();
+  const { search, hash } = useLocation();
+  const choices = [
+    { code: "fr", label: "Français" },
+    { code: "en", label: "English" },
+  ] as const;
   return (
-    <header className="site-header">
-      <div className="container header-content">
+    <nav className="language-switch" aria-label={copy[language].language}>
+      {choices.map(({ code, label }) => (
+        <Link
+          key={code}
+          to={localizedPath(code, path) + search + hash}
+          lang={code}
+          hrefLang={code}
+          aria-label={code.toUpperCase() + " · " + label}
+          aria-current={language === code ? "true" : undefined}
+          onClick={() => savePreference(code)}
+        >{code.toUpperCase()}</Link>
+      ))}
+    </nav>
+  );
+}
+
+function Header({ path }: { path: string }) {
+  const language = useLanguage();
+  const text = copy[language];
+  const home = localizedPath(language);
+  const [open, setOpen] = useState(false);
+  return (
+    <header className="header" onKeyDown={event => {
+      if (event.key === "Escape" && open) {
+        setOpen(false);
+        document.getElementById("menu-toggle")?.focus();
+      }
+    }}>
+      <div className="container header-inner">
         <Brand />
-        <nav className={open ? "nav-links nav-open" : "nav-links"} aria-label="Main navigation" id="primary-navigation">
-          {nav.map(item => <Link key={item.label} to={item.to} onClick={() => setOpen(false)}>{item.label}</Link>)}
-          <a className="nav-contact" href={contactHref} onClick={() => setOpen(false)}>Email me <Mail size={15} aria-hidden="true" /></a>
+        <nav className={open ? "main-nav open" : "main-nav"} aria-label={text.navigation} id="primary-navigation">
+          {text.nav.map((label, index) => (
+            <Link key={sectionIds[index]} to={home + "#" + sectionIds[index]} onClick={() => setOpen(false)}>{label}</Link>
+          ))}
+          <Link to={home + "#contact"} onClick={() => setOpen(false)}>{text.contact}</Link>
         </nav>
-        <button className="mobile-toggle" type="button" aria-label={open ? "Close navigation" : "Open navigation"} aria-controls="primary-navigation" aria-expanded={open} onClick={() => setOpen(!open)}>
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="header-tools">
+          <LanguageSwitch path={path} />
+          <button
+            className="menu-toggle" id="menu-toggle" type="button" aria-label={open ? text.closeMenu : text.openMenu}
+            aria-controls="primary-navigation" aria-expanded={open} onClick={() => setOpen(!open)}
+          >{open ? <X size={22} /> : <Menu size={22} />}</button>
+        </div>
       </div>
     </header>
   );
 }
 
-function ScrollManager() {
-  const location = useLocation();
+function PageEffects({ path, project }: { path: string; project?: Project }) {
+  const language = useLanguage();
+  const { hash } = useLocation();
+
   useEffect(() => {
-    const target = location.hash.replace("#", "");
-    if (target) {
-      window.setTimeout(() => document.getElementById(target)?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
-    } else {
-      window.scrollTo(0, 0);
+    document.documentElement.lang = language;
+    const title = project ? `${project.name} | ${copy[language].study} · Moustapha Adebigni`
+      : path === "/" ? site[language].title : `${copy[language].missing} | Moustapha Adebigni`;
+    const description = project?.[language].summary ?? site[language].description;
+    const canonical = publicSite + localizedPath(language, path);
+    document.title = title;
+    document.querySelector("link[rel=canonical]")?.setAttribute("href", canonical);
+    document.querySelectorAll<HTMLLinkElement>("link[rel=alternate][hreflang]").forEach(link => {
+      link.href = publicSite + localizedPath(link.hreflang === "en" ? "en" : "fr", path);
+    });
+    for (const [selector, value] of [
+      ['[name="description"]', description], ['[property="og:description"]', description],
+      ['[property="og:title"]', title], ['[property="og:url"]', canonical],
+      ['[property="og:type"]', project ? "article" : "website"],
+      ['[property="og:image"]', publicSite + (language === "fr" ? "/og-preview.png" : "/og-preview-en.png")],
+      ['[property="og:image:alt"]', title],
+    ]) {
+      document.querySelector(`meta${selector}`)?.setAttribute("content", value);
     }
-  }, [location.pathname, location.hash]);
-  return null;
-}
+  }, [language, path, project]);
 
-function RevealOnScroll() {
-  const { pathname } = useLocation();
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
-    const nodes = [...document.querySelectorAll<HTMLElement>("[data-reveal]")];
-    document.documentElement.classList.add("motion-ready");
-    const observer = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("revealed");
-          observer.unobserve(entry.target);
-        }
+    const frame = requestAnimationFrame(() => {
+      if (hash) {
+        document.getElementById(hash.slice(1))?.scrollIntoView();
+      } else {
+        window.scrollTo(0, 0);
       }
-    }, { threshold: 0.07, rootMargin: "0px 0px -20px 0px" });
-    nodes.forEach((node) => observer.observe(node));
-    return () => {
-      observer.disconnect();
-      document.documentElement.classList.remove("motion-ready");
-    };
-  }, [pathname]);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [path, hash]);
+
   return null;
-}
-
-function ReadingProgress() {
-  const bar = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    let frame = 0;
-    const update = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        if (bar.current) bar.current.style.transform = "scaleX(" + Math.max(0, Math.min(1, max > 0 ? window.scrollY / max : 0)) + ")";
-      });
-    };
-    window.addEventListener("scroll", update, { passive: true });
-    update();
-    return () => { window.removeEventListener("scroll", update); cancelAnimationFrame(frame); };
-  }, []);
-  return <div className="reading-progress" aria-hidden="true"><div ref={bar} /></div>;
-}
-
-function CareerBadge({ text = "Open to full-time opportunities" }: { text?: string }) {
-  return <span className="availability"><span aria-hidden="true">↗</span>{text}</span>;
-}
-
-function HeroSystem() {
-  const stages = [
-    ["01", "Understand the problem", "Ask questions, map the work"],
-    ["02", "Connect the pieces", "Screens, data, APIs, decisions"],
-    ["03", "Make it work", "Build, review, fix, repeat"],
-    ["04", "Test the details", "Try it, debug it, improve it"],
-  ];
-  return (
-    <div className="hero-system" aria-label="Illustration of the product building process">
-      <div className="system-top"><span className="system-kicker">A LOOK AT HOW I WORK</span><span className="system-signal">FOUR CASE STUDIES</span></div>
-      <div className="system-main">
-        <div className="system-heading">The best part?<br /><em>Making it work.</em></div>
-        <div className="system-stages">
-          {stages.map((stage, i) => (
-            <div className="system-stage" key={stage[0]}>
-              <span className="stage-no">{stage[0]}</span><div><strong>{stage[1]}</strong><small>{stage[2]}</small></div>
-              {i === 3 ? <Check size={18} aria-hidden="true" /> : <ChevronRight size={17} aria-hidden="true" />}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="system-bottom"><span>THE PROCESS / HANDS-ON</span><span>BUILD → TEST → IMPROVE</span></div>
-    </div>
-  );
 }
 
 function Hero() {
+  const language = useLanguage();
+  const text = copy[language];
   return (
-    <section className="hero container" id="top">
-      <div className="hero-eyebrow"><span>SOFTWARE DEVELOPER · AI INTEGRATIONS · UNITED STATES</span><CareerBadge /></div>
-      <div className="hero-grid">
-        <div className="hero-copy">
-          <div className="hello-note"><span aria-hidden="true">✳</span> HI, I’M MOUSTAPHA.</div>
-          <h1>I build software <span className="serif-italic">that just works.</span></h1>
-          <p className="hero-description">I work on AI tools, web apps and native software. I like untangling tricky problems, connecting the pieces and making the details feel simple.</p>
-          <div className="hero-actions">
-            <Link className="button button-dark" to="/#work">See what I’ve built <ArrowUpRight size={19} aria-hidden="true" /></Link>
-            <Link className="text-link" to="/#approach">How I work <ArrowDown size={18} aria-hidden="true" /></Link>
-          </div>
-          <div className="hero-footnote"><span className="line-mark" /> <span>Four projects, four different challenges.<br />Here’s the thinking and work behind each one.</span></div>
+    <section className="container hero" id="top">
+      <div className="hero-copy">
+        <p className="hero-role">{text.role} <span>{text.specialty}</span></p>
+        <h1>{text.hero[0]} <em>{text.hero[1]}</em></h1>
+        <p className="hero-intro">{text.intro}</p>
+        <div className="actions">
+          <Link className="button button-primary" to={localizedPath(language) + "#work"}>{text.seeWork} <ArrowDown size={17} /></Link>
+          <a className="button button-text" href={`mailto:${contactEmail}?subject=${encodeURIComponent(text.subject)}`}>{text.email} <ArrowUpRight size={17} /></a>
         </div>
-        <HeroSystem />
       </div>
-      <div className="discipline-bar" aria-label="Areas of work"><span>WHAT I WORK ACROSS</span><strong>AI AGENTS</strong><strong>DATA ANALYTICS</strong><strong>BUSINESS AUTOMATION</strong><strong>NATIVE iOS</strong></div>
+      <figure className="portrait">
+        <img src="/images/moustapha-portrait.jpg" width="1254" height="1254" alt={text.portrait} fetchPriority="high" />
+        <figcaption><strong>Moustapha Adebigni</strong><span><MapPin size={14} /> {text.location}</span></figcaption>
+      </figure>
     </section>
   );
 }
 
-const projectMedia: Record<string, { hero: string; heroAlt: string; detail: { src: string; alt: string; caption: string }[] }> = {
-  bridget: {
-    hero: "/project-shots/bridget-workspace.webp",
-    heroAlt: "Bridget macOS application showing the daily work brief, tasks and connected services",
-    detail: [
-      { src: "/project-shots/bridget-automation.webp", alt: "Bridget conversation view displaying a flight-watch automation and its controls", caption: "Automations · A work item with schedule, status and controls" },
-    ],
-  },
-  "edge-forensics": {
-    hero: "/project-shots/edge-overview.webp",
-    heroAlt: "Edge Forensics analytics landing page with a sample trading report and risk indicators",
-    detail: [
-      { src: "/project-shots/edge-report.webp", alt: "Example Edge Forensics trading report with performance figures, instrument contribution and risk score", caption: "Example report · Trading metrics, behavioral signals and risk" },
-    ],
-  },
-  "pokou-ai": {
-    hero: "/project-shots/pokou-workflow.webp",
-    heroAlt: "Pokou AI website illustrating a hotel request moving from conversation to action and human exception handling",
-    detail: [],
-  },
-  crown: {
-    hero: "/project-shots/crown-home.webp",
-    heroAlt: "CROWN native iPhone game home screen with dark royal styling",
-    detail: [
-      { src: "/project-shots/crown-match.webp", alt: "CROWN gameplay against AI, shown in the native iPhone simulator", caption: "Native gameplay · AI match" },
-      { src: "/project-shots/crown-analysis.webp", alt: "CROWN match review identifying decision moments and improvement opportunities", caption: "Training · Match analysis and decisions" },
-    ],
-  },
-};
-
-function ProjectVisual({ project }: { project: Project }) {
-  const media = projectMedia[project.slug];
-  if (!media) return null;
+function ScreenshotFigure({ screenshot, alt, caption, theme, eager = false }: {
+  screenshot: Screenshot; alt: string; caption?: string; theme: Project["theme"]; eager?: boolean;
+}) {
   return (
-    <figure className={"project-photo project-photo-" + project.type}>
-      <img src={media.hero} alt={media.heroAlt} loading="lazy" decoding="async" />
-      <figcaption><span>{project.name.toUpperCase()} / PRODUCT VIEW</span><span>{project.type === "analytics" ? "SAMPLE DATA" : "PROJECT SCREENSHOT"}</span></figcaption>
+    <figure className={`screenshot screenshot-${theme}`}>
+      <div className="screenshot-mat">
+        <img
+          src={"/project-shots/" + screenshot.file} alt={alt} width={screenshot.width} height={screenshot.height}
+          loading={eager ? "eager" : "lazy"} decoding="async"
+        />
+      </div>
+      {caption && <figcaption>{caption}</figcaption>}
     </figure>
   );
 }
-function ProjectGallery({ project }: { project: Project }) {
-  const media = projectMedia[project.slug];
-  if (!media?.detail.length) return null;
+
+function Stack({ items }: { items: string[] }) {
+  return <ul className="stack">{items.map(item => <li key={item}>{item}</li>)}</ul>;
+}
+
+function ProjectCard({ project, featured = false }: { project: Project; featured?: boolean }) {
+  const language = useLanguage();
+  const text = copy[language];
+  const content = project[language];
   return (
-    <section className="container project-gallery" aria-label={project.name + " product screenshots"}>
-      <div className="project-gallery-heading"><span>INSIDE THE PRODUCT</span><h2>See the work <em>up close.</em></h2><p>Selected screens from the application and its product experience.</p></div>
-      <div className={"project-gallery-grid project-gallery-" + project.type}>
-        {media.detail.map(image => (
-          <figure key={image.src}>
-            <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
-            <figcaption>{image.caption}</figcaption>
-          </figure>
-        ))}
+    <article className={featured ? "project-card featured" : "project-card"}>
+      <div className="project-card-copy">
+        <p className="category">{content.category}</p>
+        <h3><Link className="project-link" to={localizedPath(language, "/projects/" + project.slug)}>{project.name}</Link></h3>
+        <p className="project-summary">{content.summary}</p>
+        <Stack items={project.stack.slice(0, 4)} />
+        <span className="read-case" aria-hidden="true">{text.readCase} <ArrowUpRight size={17} /></span>
       </div>
-    </section>
+      <ScreenshotFigure screenshot={project.hero} alt={content.heroAlt} theme={project.theme} />
+    </article>
   );
 }
 
-function SectionLabel({ index, children }: { index:string; children:React.ReactNode }) {
-  return <div className="section-label"><span>{index}</span><span>{children}</span></div>;
-}
-function ProjectCard({ project }: { project: Project }) {
-  return (
-    <Link data-reveal className={"project-card card-"+project.type} to={"/projects/"+project.slug} aria-label={"Read "+project.name+" case study"}>
-      <div className="card-topline"><span>{project.number} / FEATURED PROJECT</span><span>{project.category}<ArrowUpRight size={15}/></span></div>
-      <div className="card-text"><h3>{project.name}</h3><p>{project.summary}</p></div>
-      <ProjectVisual project={project}/>
-      <div className="card-bottom"><div className="card-tags">{project.stack.slice(0,3).map(s=><span key={s}>{s}</span>)}</div><span className="card-open">View case study <ArrowUpRight size={17}/></span></div>
-    </Link>
-  );
-}
 function Work() {
-  return <section className="work-section section-pad container" id="work">
-    <SectionLabel index="01">SELECTED WORK</SectionLabel>
-    <div className="section-title-row" data-reveal><div><h2>Four projects.<br/><em>Four good challenges.</em></h2><p>From Mac automation to a checkers game for iPhone. Each one taught me something different about making software that people can use.</p></div><span className="section-count">01 — 04</span></div>
-    <div className="project-grid">{projects.map(project=><ProjectCard key={project.slug} project={project}/>)}</div>
-    <p className="privacy-note"><span className="privacy-icon">i</span> These projects live in private repositories. The case studies share the approach and the work—not private code or credentials.</p>
-  </section>;
-}
-function Approach() {
-  const steps=[["01","Understand the problem","I start by asking who it’s for and what the software actually needs to do."],["02","Find the moving parts","I break things down into screens, data, APIs and the cases that might go wrong."],["03","Build & connect","AI coding tools help me move faster. I still review the changes and how everything fits together."],["04","Try it for real","I test the complete flow, find what feels off and keep improving it."]];
-  return <section className="approach-section section-pad" id="approach"><div className="container">
-    <SectionLabel index="02">HOW I WORK</SectionLabel>
-    <div className="approach-heading" data-reveal><h2>Curiosity first.<br/><em>Then the details.</em></h2><p>I’m interested in the whole journey—from figuring out what to build to testing it on an actual device.</p></div>
-    <div className="process-grid">{steps.map(s=><div className="process-step" data-reveal key={s[0]}><span className="process-no">{s[0]}</span><div className="process-icon"><ArrowUpRight size={21}/></div><h3>{s[1]}</h3><p>{s[2]}</p></div>)}</div>
-    <div className="process-bottom"><span>MY APPROACH</span><strong>Understand it. Build it. Make it better.</strong><span>STILL LEARNING ↗</span></div>
-  </div></section>;
-}
-function About() {
-  return <section className="about-section section-pad container" id="about">
-    <SectionLabel index="03">ABOUT THE BUILDER</SectionLabel>
-    <div className="about-grid" data-reveal><div className="about-intro"><h2>I like figuring<br/><em>things out.</em></h2><figure className="about-portrait"><img src="/images/moustapha-portrait.jpg" alt="Portrait of Moustapha Adebigni" loading="lazy" decoding="async" width="1254" height="1254" /><figcaption>MOUSTAPHA ADEBIGNI <span>·</span> SOFTWARE DEVELOPER</figcaption></figure></div><div className="about-copy">
-      <p className="about-lead">I’m Moustapha. I enjoy taking a complicated task and finding a simpler way to get it done.</p>
-      <p>I use AI coding tools to help build faster, but I stay close to the work: understanding the code, connecting services, checking what happens when something fails and polishing the experience until it makes sense.</p>
-      <p>I’d like to bring that mindset to a full-time engineering team, learn from people who have been doing this longer than I have and contribute to products over the long run.</p>
-      <div className="about-practice"><span>WHAT I BRING</span><div><strong>React & TypeScript</strong><strong>Swift & SwiftUI</strong><strong>AI integrations</strong><strong>APIs & workflows</strong><strong>Debugging & QA</strong></div></div>
-    </div></div>
-  </section>;
-}
-function Contact() {
+  const language = useLanguage();
+  const text = copy[language];
   return (
-    <section className="contact-wrap" id="contact">
-      <div className="container contact-inner">
-        <div className="contact-top"><span>LET'S WORK TOGETHER</span><CareerBadge text="Open to full-time roles" /></div>
-        <div className="contact-main" data-reveal>
-          <h2>Let’s make something <em>useful together.</em></h2>
-          <p>I’m looking for a long-term software role where I can solve real problems, collaborate with a good team, and keep growing as an engineer. If that sounds like your team, I’d be glad to talk.</p>
-          <div className="contact-actions">
-            <a className="button button-light" href={contactHref}>Email me about a role <Mail size={19} aria-hidden="true" /></a>
-            <a className="contact-github" href={profileUrl} rel="noreferrer" target="_blank">View my GitHub <ArrowUpRight size={18} aria-hidden="true" /></a>
-          </div>
-          <div className="contact-direct"><span>OR WRITE DIRECTLY</span><a className="contact-email" href={`mailto:${contactEmail}`}>{contactEmail}</a></div>
-        </div>
-        <div className="contact-bottom"><span>UNITED STATES · REMOTE & ON-SITE OPEN</span><span>ENGINEERING · COLLABORATION · QUALITY</span></div>
+    <section className="container work section" id="work" aria-labelledby="work-title">
+      <div className="section-heading">
+        <h2 id="work-title">{text.studies}</h2>
+        <p>{text.workIntro}</p>
+      </div>
+      <div className="project-grid">
+        {projects.slice(0, 3).map((project, index) => <ProjectCard key={project.slug} project={project} featured={index === 0} />)}
+      </div>
+      <div className="other-project">
+        <div><p className="category">{text.moreWork}</p><h3>CROWN</h3><p>{projects[3][language].summary}</p></div>
+        <Link className="button button-outline" to={localizedPath(language, "/projects/crown")}>{text.readCase} <ArrowUpRight size={17} /></Link>
       </div>
     </section>
   );
 }
-function Footer() {
-  return <footer className="site-footer"><div className="container footer-content"><Brand/><span>Selected software projects · {activeYear}</span><a href="https://github.com/rodthenewcomer/portfolio" target="_blank" rel="noreferrer" aria-label="View the source code of this portfolio on GitHub" title="Portfolio source code"><GitBranch size={19}/><ArrowUpRight size={14}/></a></div></footer>;
-}
-function HomePage() {
-  useEffect(()=>{document.title="Moustapha Adebigni — Software Developer & AI Integrations";},[]);
-  return <><Hero/><Work/><Approach/><About/><Contact/></>;
-}
-function ProjectPage() {
-  const {slug}=useParams();
-  const project=projects.find(p=>p.slug===slug);
-  useEffect(()=>{document.title=project?project.name+" — Moustapha Adebigni | Case Study":"Project not found";},[project]);
-  if(!project)return <div className="container not-found"><span>404 / NOT FOUND</span><h1>That project isn't here.</h1><Link className="button button-dark" to="/">Back to portfolio <ArrowLeft size={18}/></Link></div>;
-  const index=projects.findIndex(p=>p.slug===project.slug);
-  const next=projects[(index+1)%projects.length];
-  return <div className="case-study">
-    <ReadingProgress />
-    <div className="container case-intro"><Link className="back-link" to="/#work"><ArrowLeft size={17}/> All selected work</Link><div className="case-kicker"><span>{project.number} / CASE STUDY</span><span>{project.discipline}</span></div><div className="case-headline" data-reveal><h1>{project.headline}</h1><p>{project.summary}</p></div></div>
-    <div className="container case-visual"><ProjectVisual project={project}/></div>
-    <ProjectGallery project={project}/>
-    <div className="container case-facts">{project.facts.map(f=><div key={f[1]}><strong>{f[0]}</strong><span>{f[1]}</span></div>)}<div className="case-fact-type"><span>PROJECT</span><strong>{project.name}</strong></div></div>
-    <nav className="container case-jump" aria-label="Case study sections">
-      <span className="case-jump-label">JUMP TO THE DETAILS</span>
-      <div className="case-jump-links">
-        <a href="#case-problem"><span>01</span> Problem &amp; solution <ArrowDown size={14} aria-hidden="true" /></a>
-        <a href="#case-decisions"><span>02</span> Engineering decisions <ArrowDown size={14} aria-hidden="true" /></a>
-        <a href="#case-system"><span>03</span> System flow <ArrowDown size={14} aria-hidden="true" /></a>
-        <a href="#case-build"><span>04</span> Build &amp; behavior <ArrowDown size={14} aria-hidden="true" /></a>
+
+function Approach() {
+  const text = copy[useLanguage()];
+  return (
+    <section className="approach section" id="approach" aria-labelledby="approach-title">
+      <div className="container">
+        <div className="section-heading">
+          <h2 id="approach-title">{text.method}</h2>
+          <p>{text.methodIntro}</p>
+        </div>
+        <ol className="steps">
+          {text.steps.map(([title, description], index) => {
+            const Icon = stepIcons[index];
+            return <li key={title}><Icon size={23} /><h3>{title}</h3><p>{description}</p></li>;
+          })}
+        </ol>
       </div>
-    </nav>
-    <section id="case-problem" className="container case-section case-two-col" data-reveal><div className="case-aside">01 / CONTEXT</div><div className="case-body"><h2>The problem</h2><p>{project.challenge}</p><h2>What I built</h2><p>{project.solution}</p></div></section>
-    <section id="case-decisions" className="case-decisions"><div className="container"><div className="case-heading"><span>02 / THE IMPORTANT CHOICES</span><h2>Why I built it <em>this way.</em></h2></div><div className="decisions-grid" data-reveal>{project.decisions.map((d,i)=><article key={d[0]}><span>0{i+1} / DECISION</span><h3>{d[0]}</h3><p>{d[1]}</p></article>)}</div></div></section>
-    <section id="case-system" className="container case-section case-two-col" data-reveal><div className="case-aside">03 / SYSTEM FLOW</div><div className="case-body"><h2>How the system works</h2><p className="flow-note">Here’s the flow at a glance, without exposing private code.</p><div className="pipeline">{project.flow.map((stage,i)=><div className="pipeline-item" key={stage}><span>{String(i+1).padStart(2,"0")}</span><strong>{stage}</strong>{i<project.flow.length-1&&<ArrowRight size={16} aria-hidden="true"/>}</div>)}</div><div className="case-stack"><span>TOOLS & TECHNOLOGIES</span><div>{project.stack.map(tech=><span key={tech}>{tech}</span>)}</div></div></div></section>
-    <section id="case-build" className="container case-section case-two-col" data-reveal><div className="case-aside">04 / BUILD & RESULTS</div><div className="case-body"><h2>What I worked on</h2><p>{project.contribution}</p><div className="case-status"><span className="status-label"><i/> WHAT YOU CAN DO WITH IT</span><p>{project.status}</p></div><div className="case-learning"><span>ONE THING THIS PROJECT TAUGHT ME</span><blockquote>“{project.lesson}”</blockquote></div></div></section>
-    <section className="next-project"><div className="container"><span>UP NEXT / {next.number}</span><Link to={"/projects/"+next.slug}><span>{next.name}</span><ArrowUpRight size={32}/></Link></div></section>
-    <Contact />
-  </div>;
+    </section>
+  );
 }
 
-export default function App(){
-  return <><a className="skip-link" href="#main">Skip to content</a><ScrollManager/><RevealOnScroll/><Header/><main id="main"><Routes><Route path="/" element={<HomePage/>}/><Route path="/projects/:slug" element={<ProjectPage/>}/><Route path="*" element={<div className="container not-found"><h1>Page not found.</h1><Link to="/">Return home <ArrowRight size={16}/></Link></div>}/></Routes></main><Footer/></>;
+function About() {
+  const text = copy[useLanguage()];
+  return (
+    <section className="container about section" id="about" aria-labelledby="about-title">
+      <div>
+        <h2 id="about-title">{text.about}</h2>
+        <p className="about-lead">{text.independent}</p>
+        <p>{text.aboutText}</p>
+        <p>{text.aboutCareer}</p>
+      </div>
+      <div className="skills">
+        <h3>{text.skills}</h3>
+        <dl>{text.skillGroups.map(([name, values]) => <div key={name}><dt>{name}</dt><dd>{values}</dd></div>)}</dl>
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  const text = copy[useLanguage()];
+  return (
+    <section className="contact section" id="contact" aria-labelledby="contact-title">
+      <div className="container contact-inner">
+        <div><h2 id="contact-title">{text.contactTitle}</h2><p>{text.contactBody}</p></div>
+        <div className="actions">
+          <a className="button button-light" href={`mailto:${contactEmail}?subject=${encodeURIComponent(text.subject)}`}><Mail size={18} /> {contactEmail}</a>
+          <a className="button button-ghost" href={profileUrl} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={17} /></a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  const text = copy[useLanguage()];
+  return (
+    <footer className="footer">
+      <div className="container footer-inner">
+        <Brand />
+        <a href={profileUrl + "/portfolio"} target="_blank" rel="noreferrer">{text.footerCode} <ArrowUpRight size={16} /></a>
+      </div>
+    </footer>
+  );
+}
+
+function ProjectPage({ project }: { project: Project }) {
+  const language = useLanguage();
+  const text = copy[language];
+  const content = project[language];
+  const next = projects[(projects.indexOf(project) + 1) % projects.length];
+
+  return (
+    <>
+      <article className="case-study">
+        <header className="container case-intro">
+          <Link className="back-link" to={localizedPath(language) + "#work"}><ArrowLeft size={17} /> {text.back}</Link>
+          <p className="category">{text.study} <span>{content.category}</span></p>
+          <h1>{project.name}</h1>
+          <p className="case-headline">{content.headline}</p>
+          <p className="case-summary">{content.summary}</p>
+          <Stack items={project.stack} />
+          {project.publicUrl && content.publicLabel && (
+            <a className="button button-outline case-public" href={project.publicUrl} target="_blank" rel="noreferrer">
+              {content.publicLabel} <ArrowUpRight size={17} />
+            </a>
+          )}
+        </header>
+        <div className="container case-visual">
+          <ScreenshotFigure screenshot={project.hero} alt={content.heroAlt} caption={content.heroCaption} theme={project.theme} eager />
+        </div>
+        <nav className="container case-jump" aria-label={text.jump}>
+          {text.sections.map((label, index) => <a key={caseIds[index]} href={"#" + caseIds[index]}>{label}<ArrowDown size={15} /></a>)}
+        </nav>
+        <section className="container case-section" id="case-problem">
+          <h2>{text.sections[0]}</h2>
+          <div className="case-copy">
+            <h3>{text.problem}</h3><p>{content.challenge}</p>
+            <h3>{text.contribution}</h3><p>{content.contribution}</p>
+          </div>
+        </section>
+        <section className="case-decisions" id="case-decisions">
+          <div className="container">
+            <h2>{text.sections[1]}</h2>
+            <div className="decision-grid">
+              {content.decisions.map(([title, description]) => <div key={title}><h3>{title}</h3><p>{description}</p></div>)}
+            </div>
+          </div>
+        </section>
+        <section className="container case-section" id="case-system">
+          <h2>{text.sections[2]}</h2>
+          <div className="case-copy">
+            <ol className="pipeline">
+              {content.flow.map((stage, index) => (
+                <li key={stage}><span>{stage}</span>{index < content.flow.length - 1 && <ArrowRight size={16} aria-hidden="true" />}</li>
+              ))}
+            </ol>
+            <h3>{text.stack}</h3><Stack items={project.stack} />
+          </div>
+        </section>
+        <section className="container case-section" id="case-build">
+          <h2>{text.sections[3]}</h2>
+          <div className="case-copy">
+            <h3>{text.verification}</h3><p>{content.verification}</p>
+            <h3>{text.scope}</h3><p>{content.scope}</p>
+          </div>
+        </section>
+        {project.gallery && content.galleryText && (
+          <section className="container gallery">
+            <h2>{text.gallery}</h2>
+            <div className={`gallery-grid gallery-${project.theme}`}>
+              {project.gallery.map((screenshot, index) => (
+                <ScreenshotFigure key={screenshot.file} screenshot={screenshot} alt={content.galleryText?.[index][0] ?? ""}
+                  caption={content.galleryText?.[index][1]} theme={project.theme} />
+              ))}
+            </div>
+          </section>
+        )}
+        <div className="container next-project">
+          <Link to={localizedPath(language, "/projects/" + next.slug)}>
+            <div><p className="category">{text.next}</p><strong>{next.name}</strong></div><ArrowUpRight size={28} />
+          </Link>
+        </div>
+      </article>
+      <Contact />
+    </>
+  );
+}
+
+function NotFound() {
+  const language = useLanguage();
+  const text = copy[language];
+  return <section className="container not-found"><h1>{text.missing}</h1><Link className="back-link" to={localizedPath(language)}><ArrowLeft size={17} /> {text.returnHome}</Link></section>;
+}
+
+export default function App() {
+  const location = useLocation();
+  const prefix = /^\/(fr|en)(?=\/|$)/.exec(location.pathname);
+  const path = (prefix ? location.pathname.slice(prefix[0].length) : location.pathname).replace(/\/+$/, "") || "/";
+  const language = prefix?.[1] as Language | undefined;
+  const slug = matchPath("/projects/:slug", path)?.params.slug;
+  const project = projects.find(item => item.slug === slug);
+
+  if (!language) {
+    return <Navigate replace to={localizedPath(readPreference(), path) + location.search + location.hash} />;
+  }
+
+  return (
+    <LanguageContext.Provider value={language}>
+      <PageEffects path={path} project={project} />
+      <a className="skip-link" href="#main">{copy[language].skip}</a>
+      <Header key={path} path={path} />
+      <main id="main" tabIndex={-1}>
+        {path === "/" ? <><Hero /><Work /><Approach /><About /><Contact /></>
+          : project ? <ProjectPage project={project} /> : <NotFound />}
+      </main>
+      <Footer />
+    </LanguageContext.Provider>
+  );
 }

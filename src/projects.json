@@ -1,240 +1,184 @@
 [
   {
-    "slug": "bridget",
-    "number": "01",
-    "name": "Bridget",
-    "category": "AI agents & automation",
-    "discipline": "Native macOS · Intelligent workflows",
-    "type": "agent",
-    "headline": "An AI assistant that can follow through.",
-    "summary": "A Mac app that turns a request into a plan, works through approved steps, and helps you see what actually got done.",
-    "stack": [
-      "Swift",
-      "SwiftUI",
-      "macOS",
-      "Agent orchestration",
-      "Local execution",
-      "Permissions"
-    ],
-    "facts": [
-      [
-        "macOS",
-        "Native app"
+    "slug": "pokou-ai",
+    "name": "Pokou AI",
+    "theme": "business",
+    "publicUrl": "https://pokou.ai/",
+    "stack": ["Next.js", "TypeScript", "Fastify", "PostgreSQL", "OpenAI API", "Redis"],
+    "hero": { "file": "pokou-workflow.webp", "width": 1500, "height": 785 },
+    "fr": {
+      "category": "Automatisation métier",
+      "publicLabel": "Voir le site de Pokou AI",
+      "headline": "De la demande client à l’action métier",
+      "summary": "Un assistant conversationnel qui applique des règles métier, déclenche des actions via API et transmet les exceptions à l’équipe avec leur contexte.",
+      "heroAlt": "Page de Pokou AI illustrant le traitement d’une réservation d’hôtel, de la demande au transfert d’une exception",
+      "heroCaption": "Page produit montrant un exemple de parcours hôtelier",
+      "challenge": "Une demande reçue dans une conversation peut nécessiter des vérifications, une action dans un autre outil et un suivi par l’équipe. Quand ces étapes sont éparpillées, il devient difficile de savoir où en est la demande.",
+      "contribution": "J’ai cartographié les parcours clients, relié les conversations à des actions via API et structuré un moteur de règles partagé. Les modules hôtel et école ajoutent les étapes propres à chaque activité.",
+      "decisions": [
+        ["Un moteur commun", "J’ai centralisé les étapes réutilisables dans un moteur partagé. Les règles propres à l’hôtellerie et aux écoles restent dans leurs modules."],
+        ["Des actions encadrées", "Le moteur applique les règles métier entre l’interprétation du message et l’action via API. Cette séparation permet de suivre le parcours de la demande."],
+        ["Une reprise avec le contexte", "Quand la situation exige une personne, le transfert garde les informations utiles de la demande et la conversation."]
       ],
-      [
-        "Agents",
-        "Coordinated workflows"
+      "flow": ["Demande client", "Intention", "Règles métier", "Action via API", "Confirmation ou transfert"],
+      "verification": "J’ai suivi le parcours du message jusqu’à l’action pour vérifier le passage entre la conversation, les règles et les intégrations.",
+      "scope": "Moteur de règles partagé, modules hôtel et école, actions via API et transfert à une personne. La capture illustre un scénario hôtelier présenté sur la page produit."
+    },
+    "en": {
+      "category": "Business operations",
+      "publicLabel": "Visit the Pokou AI site",
+      "headline": "From customer request to business action",
+      "summary": "A conversational assistant that applies business rules, triggers actions via APIs and hands exceptions to the team with the context they need.",
+      "heroAlt": "Pokou AI product page illustrating a hotel booking from the initial request to an exception handoff",
+      "heroCaption": "Product page illustrating a hotel booking workflow",
+      "challenge": "A request received in chat can require a few checks, an action in another tool and a follow-up from the team. When those steps are scattered, it gets harder to tell where the request stands.",
+      "contribution": "I mapped customer journeys, connected conversations to API-backed actions and structured a shared rules engine. Hotel and school modules add the steps specific to each business.",
+      "decisions": [
+        ["One shared engine", "I put reusable steps in a common engine. Rules specific to hotels and schools stay in their respective modules."],
+        ["Rules guide execution", "The engine applies business rules between interpreting a message and calling an API. Separating those steps makes the request easier to trace."],
+        ["Keep context at handoff", "When a request needs a person, the handoff carries the conversation and relevant details along with it."]
       ],
-      [
-        "SwiftUI",
-        "User interface"
-      ]
-    ],
-    "challenge": "AI assistants are great at explaining what to do. But I kept running into the same problem: I still had to open the apps, find the files and finish everything myself. On a Mac, even a small task can involve several tools and a few important permission checks.",
-    "solution": "Bridget puts those pieces in one native workspace. Tasks have clear states, agents have specific responsibilities, and access to the Mac goes through explicit permissions. The idea is simple: less back-and-forth, more useful work completed.",
-    "decisions": [
-      [
-        "Put the task first",
-        "I organized the experience around what needs attention, what's running and what's finished. You shouldn't have to remember which chat or tool holds the next step."
-      ],
-      [
-        "Keep control close to the user",
-        "An agent can suggest an action, but that doesn't automatically give it permission. Local access and approvals are built into the workflow."
-      ],
-      [
-        "Check the result",
-        "A confident 'done' isn't enough. The interface needs to show what happened, whether the step succeeded and what needs attention next."
-      ]
-    ],
-    "flow": [
-      "Goal",
-      "Plan",
-      "Permissions",
-      "Execute",
-      "Verify"
-    ],
-    "status": "A native macOS workspace with task tracking, permission-aware execution, connected capabilities and a specialized RodTrader AI workflow.",
-    "next": "Reliable permissions, multi-step execution and verifiable task outcomes.",
-    "contribution": "I worked on the SwiftUI experience, task flows, agent integration boundaries and hands-on testing, using AI coding tools to help build and review the application.",
-    "lesson": "An assistant becomes useful when you can trust what it did, not just what it says it did."
+      "flow": ["Customer request", "Intent", "Business rules", "API action", "Confirmation or handoff"],
+      "verification": "I followed requests from message to action to check how the conversation, business rules and integrations fit together.",
+      "scope": "Shared rules engine, hotel and school modules, API-backed actions and a human handoff. The screenshot illustrates a hotel scenario from the product page."
+    }
   },
   {
     "slug": "edge-forensics",
-    "number": "02",
     "name": "Edge Forensics",
-    "category": "AI & analytics",
-    "discipline": "Behavioral analysis · Full-stack SaaS",
-    "type": "analytics",
-    "headline": "A clearer picture of why trades go wrong.",
-    "summary": "A tool that reads futures-trading history, calculates performance metrics and highlights habits that are easy to miss in a spreadsheet.",
-    "stack": [
-      "Next.js 16",
-      "React",
-      "TypeScript",
-      "Claude API",
-      "Supabase",
-      "PostgreSQL",
-      "Stripe"
-    ],
-    "facts": [
-      [
-        "14",
-        "Behavior patterns"
+    "theme": "analytics",
+    "publicUrl": "https://edgeforensics.io/demo",
+    "stack": ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL", "Claude API"],
+    "hero": { "file": "edge-overview.webp", "width": 1500, "height": 760 },
+    "gallery": [{ "file": "edge-report.webp", "width": 1500, "height": 902 }],
+    "fr": {
+      "category": "Analyse de données",
+      "publicLabel": "Essayer la démo Edge Forensics",
+      "headline": "Des historiques de trading aux habitudes à examiner",
+      "summary": "Une application full stack qui importe des historiques de transactions, calcule les indicateurs dans le code et s’appuie sur l’IA pour expliquer les comportements observés.",
+      "heroAlt": "Page Edge Forensics affichant un exemple de rapport d’analyse de transactions",
+      "heroCaption": "Aperçu du produit avec des données d’exemple",
+      "galleryText": [["Exemple de rapport Edge Forensics avec indicateurs de performance, résultats par instrument et score de risque", "Rapport d’exemple présentant les résultats par instrument et le niveau de risque"]],
+      "challenge": "Un historique de transactions indique ce qui s’est passé. Pour préparer la séance suivante, il faut pouvoir repérer les comportements qui se répètent et revenir aux données qui les étayent.",
+      "contribution": "J’ai conçu le parcours d’import jusqu’au rapport, défini les indicateurs avec la logique applicative, intégré l’API Claude et relié le rapport à un journal de séance.",
+      "decisions": [
+        ["Normaliser les imports", "Quatre formats d’export alimentent un parcours commun d’analyse et de restitution."],
+        ["Calculer dans l’application", "La logique applicative calcule les indicateurs, dont la durée des transactions. L’API Claude intervient ensuite pour mettre en contexte les résultats."],
+        ["Relier le constat à la suite", "Le rapport présente les éléments qui étayent un comportement. Le journal permet de noter un point à travailler lors de la prochaine séance."]
       ],
-      [
-        "4",
-        "Import formats"
+      "flow": ["Export de transactions", "Import et normalisation", "Calcul des indicateurs", "Interprétation IA", "Rapport et journal"],
+      "verification": "J’ai revu le parcours d’import et contrôlé les indicateurs affichés dans le rapport. La séparation entre calcul et interprétation permet d’examiner les valeurs avant la génération du texte.",
+      "scope": "Quatre formats d’export, quatorze schémas comportementaux et un journal de séance. Les valeurs visibles dans les captures proviennent d’un rapport d’exemple."
+    },
+    "en": {
+      "category": "Data analytics",
+      "publicLabel": "Try the Edge Forensics demo",
+      "headline": "Turning trade history into habits you can review",
+      "summary": "A full-stack app that imports trading history, calculates metrics in code and uses AI to explain the behavior in the data.",
+      "heroAlt": "Edge Forensics page displaying a sample trading analysis report",
+      "heroCaption": "Product preview with sample data",
+      "galleryText": [["Sample Edge Forensics report, showing performance metrics, breakdown by instrument and a risk score", "Sample report with instrument-level results and risk indicators"]],
+      "challenge": "Trade history tells you what happened. To prepare for the next session, traders need to spot recurring behavior and find the data that supports it.",
+      "contribution": "I designed the workflow from import to report, defined the metrics in application logic, integrated the Claude API and connected the report to a session journal.",
+      "decisions": [
+        ["Normalize incoming files", "Four export formats feed a common workflow for analysis and reporting."],
+        ["Calculate metrics in code", "Application logic calculates metrics, including how long trades stay open. The Claude API then puts the results in context."],
+        ["Tie insights to the next session", "The report includes the evidence behind a pattern. The journal gives traders a place to record one thing to work on next time."]
       ],
-      [
-        "Journal",
-        "Session follow-up"
-      ]
-    ],
-    "challenge": "Traders usually know when they've lost money. What's harder is spotting the habits behind those losses. Revenge trading, rushed entries or bigger-than-usual positions can disappear inside a long list of trades.",
-    "solution": "I designed the experience around a straightforward loop: import trade history, calculate the numbers, review AI-assisted feedback, then write down one behavior to focus on next time. The report and journal work together rather than feeling like separate tools.",
-    "decisions": [
-      [
-        "Do the math in code",
-        "Metrics like R multiples and trade duration are calculated before an AI model sees the data. The explanation can be flexible, but the numbers need to stay reliable."
-      ],
-      [
-        "Show what matters first",
-        "Instead of a report full of charts, the experience starts with the patterns that deserve attention and the evidence behind them."
-      ],
-      [
-        "Make the feedback useful tomorrow",
-        "A journal links the analysis to the next session, so a good insight doesn't get forgotten as soon as the report is closed."
-      ]
-    ],
-    "flow": [
-      "Trade export",
-      "Parse",
-      "Metrics",
-      "AI analysis",
-      "Report & journal"
-    ],
-    "status": "Trade imports from four broker formats, calculated metrics, AI-assisted pattern reviews, structured reports and a session journal.",
-    "next": "Calculated metrics, explained patterns and structured follow-up.",
-    "contribution": "I worked through the import experience, analytics requirements, report design, API integration and QA. Getting the numbers right mattered as much as making the report easy to read.",
-    "lesson": "Code should handle the math. AI is more helpful when it's explaining the patterns behind it."
+      "flow": ["Trade export", "Parse and normalize", "Calculate metrics", "AI interpretation", "Report and journal"],
+      "verification": "I reviewed the import workflow and checked the metrics shown in the report. Separating calculation from interpretation makes it possible to inspect the figures before any text is generated.",
+      "scope": "Four export formats, fourteen trading behavior patterns and a session journal. The screenshots use figures from a sample report."
+    }
   },
   {
-    "slug": "pokou-ai",
-    "number": "03",
-    "name": "Pokou AI",
-    "category": "Conversational AI",
-    "discipline": "Business automation · Operations SaaS",
-    "type": "business",
-    "headline": "Helping businesses keep up with every customer.",
-    "summary": "An AI assistant that connects customer conversations to practical tasks, from handling questions to passing the right details to a teammate.",
-    "stack": [
-      "Next.js 15",
-      "TypeScript",
-      "Fastify",
-      "OpenAI",
-      "Supabase",
-      "PostgreSQL",
-      "Redis"
-    ],
-    "facts": [
-      [
-        "2",
-        "Industry modules"
+    "slug": "bridget",
+    "name": "Bridget",
+    "theme": "agent",
+    "stack": ["Swift", "SwiftUI", "macOS"],
+    "hero": { "file": "bridget-workspace.webp", "width": 1500, "height": 844 },
+    "gallery": [{ "file": "bridget-automation.webp", "width": 1500, "height": 844 }],
+    "fr": {
+      "category": "Agents IA sur macOS",
+      "headline": "Des agents IA dont on peut suivre les actions",
+      "summary": "Un espace de travail macOS qui transforme une demande en étapes, encadre l’accès aux outils et affiche l’état de l’exécution.",
+      "heroAlt": "Interface macOS de Bridget affichant le tableau de bord, les tâches et les services connectés",
+      "heroCaption": "Espace de travail macOS et suivi des tâches",
+      "galleryText": [["Conversation Bridget présentant une veille de vols planifiée et ses commandes", "Veille planifiée avec état, fréquence et commandes"]],
+      "challenge": "Pour mener une tâche entre plusieurs outils, un assistant doit obtenir les accès nécessaires et rendre visible ce qui s’est passé. L’utilisateur doit pouvoir reprendre la main si une étape échoue.",
+      "contribution": "J’ai travaillé sur l’interface SwiftUI, le suivi des tâches et les limites entre agent, outils et exécution locale. J’ai aussi examiné les échecs d’action pour rendre leurs résultats vérifiables dans l’interface.",
+      "decisions": [
+        ["Structurer la demande", "Le travail est suivi sous forme d’étapes, chacune avec son rôle et son état. L’utilisateur peut voir ce qui attend une intervention."],
+        ["Gérer les permissions", "Une action proposée passe par les permissions prévues par le parcours. Les étapes qui l’exigent sont soumises à approbation."],
+        ["Exposer le résultat", "L’interface distingue les étapes exécutées de celles qui ont échoué ou exigent un suivi."]
       ],
-      [
-        "Multiple",
-        "Channel interfaces"
+      "flow": ["Objectif", "Plan", "Permissions", "Exécution", "Vérification"],
+      "verification": "J’ai reproduit des actions en échec et examiné les frontières d’intégration et les états affichés côté macOS pour comprendre où le parcours se bloquait.",
+      "scope": "Étude centrée sur le parcours macOS, le suivi des tâches et les permissions. La galerie montre l’interface d’une veille planifiée."
+    },
+    "en": {
+      "category": "AI agents on macOS",
+      "headline": "AI agents with visible execution",
+      "summary": "A macOS workspace that turns requests into steps, controls access to tools and shows the state of each action.",
+      "heroAlt": "Bridget’s macOS workspace showing the dashboard, tasks and connected services",
+      "heroCaption": "macOS workspace and task tracking",
+      "galleryText": [["Bridget conversation showing a scheduled flight watch and its controls", "Scheduled watch with status, frequency and controls"]],
+      "challenge": "To complete a task across tools, an assistant needs the right access and a way to show what happened. The user needs a clear way to step in when something fails.",
+      "contribution": "I worked on the SwiftUI interface, task tracking and the boundaries between agents, tools and local execution. I also investigated failed actions to make their results easier to verify in the interface.",
+      "decisions": [
+        ["Break requests into steps", "Each step has a purpose and a state. The user can see which actions are waiting for their attention."],
+        ["Manage permissions", "Proposed actions go through the workflow’s permission checks. Steps that require user approval wait for it."],
+        ["Show what happened", "The interface distinguishes completed steps from failures and actions that need follow-up."]
       ],
-      [
-        "Human",
-        "Handoff workflow"
-      ]
-    ],
-    "challenge": "A customer asks a question in chat. Someone needs to check the details, follow up and confirm what happens next. When those steps sit in different apps or people's memories, requests can easily get missed.",
-    "solution": "Pokou brings conversations and everyday business work into one flow. A shared engine handles common tasks, while hotel and school modules add the details each business needs. The handoff to a person is part of the design, not an afterthought.",
-    "decisions": [
-      [
-        "Start with the job, not the chatbot",
-        "The important question isn't whether the AI sounds impressive. It's whether a customer's request moves to a useful next step."
-      ],
-      [
-        "Reuse what every business needs",
-        "Common workflows live in one engine. Industry modules bring in the specific rules instead of duplicating the entire system."
-      ],
-      [
-        "Make human handoff easy",
-        "When a person needs to step in, the useful context should go with the request. Nobody should have to start the conversation from scratch."
-      ]
-    ],
-    "flow": [
-      "Customer request",
-      "Intent",
-      "Rules",
-      "Action",
-      "Confirm / hand off"
-    ],
-    "status": "A shared business engine, customer conversation workflows, human handoff and dedicated hotel and school modules.",
-    "next": "Customer operations with safe escalation and shared business rules.",
-    "contribution": "I mapped customer journeys, worked through service integrations and business workflows, and checked how requests move from a message to an action.",
-    "lesson": "A good AI assistant doesn't just respond quickly. It helps someone finish the job."
+      "flow": ["Goal", "Plan", "Permissions", "Execute", "Verify"],
+      "verification": "I reproduced failed actions and looked at the integration boundaries and macOS task states to find where the workflow was getting stuck.",
+      "scope": "This case study covers the macOS task workflow, tracking and permissions. The gallery shows the controls for a scheduled watch."
+    }
   },
   {
     "slug": "crown",
-    "number": "04",
     "name": "CROWN",
-    "category": "Native iOS",
-    "discipline": "Game systems · Modular Swift",
-    "type": "game",
-    "headline": "A checkers game where every move makes sense.",
-    "summary": "A native iPhone checkers game with four rule variants, a responsive board and complete offline matches.",
-    "stack": [
-      "Swift 6",
-      "SwiftUI",
-      "SpriteKit",
-      "SwiftData",
-      "GameCore",
-      "Game AI"
+    "theme": "game",
+    "stack": ["Swift 6", "SwiftUI", "SpriteKit", "GameCore"],
+    "hero": { "file": "crown-home.webp", "width": 760, "height": 1653 },
+    "gallery": [
+      { "file": "crown-match.webp", "width": 760, "height": 1653 },
+      { "file": "crown-analysis.webp", "width": 760, "height": 1653 }
     ],
-    "facts": [
-      [
-        "4",
-        "Rulesets"
+    "fr": {
+      "category": "Jeu natif sur iPhone",
+      "headline": "Un moteur de règles indépendant du plateau",
+      "summary": "Un jeu de dames natif sur iPhone qui prend en charge quatre variantes et des parties complètes hors ligne.",
+      "heroAlt": "Écran d’accueil du jeu de dames CROWN sur iPhone",
+      "heroCaption": "Écran d’accueil du jeu sur iPhone",
+      "galleryText": [["Partie de dames contre l’ordinateur dans le simulateur iPhone", "Partie contre l’ordinateur"], ["Écran CROWN de revue d’une partie", "Revue des décisions prises pendant la partie"]],
+      "challenge": "Les prises, les promotions et les conditions de victoire varient selon les règles choisies. L’interface doit refléter ces différences pendant toute la partie.",
+      "contribution": "J’ai séparé les règles dans un moteur Swift. SpriteKit affiche le plateau et SwiftUI gère la navigation et les autres écrans.",
+      "decisions": [
+        ["Centraliser les règles", "GameCore détermine les coups autorisés et l’issue de la partie. Le plateau affiche l’état calculé par le moteur."],
+        ["Séparer affichage et interactions", "SpriteKit gère le plateau interactif et SwiftUI prend en charge les menus et la navigation."],
+        ["Tester la partie complète", "Le parcours de test va du choix de la variante jusqu’au résultat et à la relance d’une partie."]
       ],
-      [
-        "8×8 / 10×10",
-        "Board formats"
+      "flow": ["Choix des règles", "Configuration", "Moteur GameCore", "Plateau SpriteKit", "Résultat"],
+      "verification": "J’ai vérifié les coups autorisés, les prises, les promotions, l’annulation et les fins de partie dans le parcours hors ligne.",
+      "scope": "Quatre variantes sur des plateaux 8 × 8 et 10 × 10, en partie locale ou contre l’ordinateur."
+    },
+    "en": {
+      "category": "Native iPhone game",
+      "headline": "A rules engine independent of the board",
+      "summary": "A native iPhone checkers game with four rulesets and complete offline matches.",
+      "heroAlt": "Home screen of the CROWN checkers game for iPhone",
+      "heroCaption": "iPhone game home screen",
+      "galleryText": [["Checkers match against the computer in the iPhone simulator", "Match against the computer"], ["CROWN match review screen", "Reviewing decisions made during the match"]],
+      "challenge": "Captures, promotions and winning conditions vary by ruleset. The interface needs to reflect those differences throughout a match.",
+      "contribution": "I separated the rules into a Swift engine. SpriteKit renders the board, and SwiftUI handles navigation and the other screens.",
+      "decisions": [
+        ["Keep the rules in one place", "GameCore determines legal moves and match outcomes. The board displays the state calculated by the engine."],
+        ["Separate rendering and navigation", "SpriteKit handles the interactive board and SwiftUI handles menus and navigation."],
+        ["Test the whole match", "The test flow starts with ruleset selection and continues through the result and restart."]
       ],
-      [
-        "Offline",
-        "Full match flow"
-      ]
-    ],
-    "challenge": "A checkers board can look beautiful and still play wrong. Captures, promotions and winning conditions change across variants, so I needed a reliable way to keep the rules consistent without burying them in the interface code.",
-    "solution": "CROWN separates the game rules from what players see. A Swift rules engine decides which moves are legal, while SpriteKit draws the board and SwiftUI handles the rest of the app. That makes it easier to test a move without testing an entire screen.",
-    "decisions": [
-      [
-        "Let the rules engine decide",
-        "GameCore is the single place that determines legal moves and results. The board never invents its own rules."
-      ],
-      [
-        "Make the board feel native",
-        "SwiftUI and SpriteKit work together so the game can have a responsive board without sacrificing familiar iPhone navigation."
-      ],
-      [
-        "Test complete matches",
-        "The offline flow runs from selecting a rule set through playing, seeing a result and starting again. That catches problems that isolated move tests might miss."
-      ]
-    ],
-    "flow": [
-      "Select rules",
-      "Match setup",
-      "GameCore",
-      "SpriteKit",
-      "Result"
-    ],
-    "status": "Offline matches in American, Brazilian, Russian and International checkers, against a basic computer opponent or another person on the same device.",
-    "next": "Modular game rules, native performance and consistent match outcomes.",
-    "contribution": "I worked on game rules, the Swift module structure, board behavior and QA for captures, promotions, undo and match results.",
-    "lesson": "The satisfying part of a game isn't only how it looks. It's knowing the rules hold up when someone actually plays."
+      "flow": ["Select rules", "Match setup", "GameCore engine", "SpriteKit board", "Result"],
+      "verification": "I verified legal moves, captures, promotions, undo and game outcomes in the offline match flow.",
+      "scope": "Four rulesets on 8 × 8 and 10 × 10 boards, with local matches or a computer opponent."
+    }
   }
 ]

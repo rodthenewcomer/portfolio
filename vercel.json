@@ -3,10 +3,9 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    {"source": "/projects/bridget", "destination": "/projects/bridget/index.html"},
-    {"source": "/projects/edge-forensics", "destination": "/projects/edge-forensics/index.html"},
-    {"source": "/projects/pokou-ai", "destination": "/projects/pokou-ai/index.html"},
-    {"source": "/projects/crown", "destination": "/projects/crown/index.html"},
-    {"source": "/((?!assets/|favicon\\.svg|robots\\.txt|sitemap\\.xml).*)", "destination": "/index.html"}
+    { "source": "/:language(fr|en)", "destination": "/:language/index.html" },
+    { "source": "/:language(fr|en)/projects/:project(pokou-ai|edge-forensics|bridget|crown)", "destination": "/:language/projects/:project/index.html" },
+    { "source": "/projects/:project(pokou-ai|edge-forensics|bridget|crown)", "destination": "/projects/:project/index.html" },
+    { "source": "/((?!assets/|project-shots/|images/|favicon\\.svg|robots\\.txt|sitemap\\.xml|og-preview\\.).*)", "destination": "/index.html" }
   ]
 }
