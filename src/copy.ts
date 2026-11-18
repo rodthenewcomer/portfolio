@@ -1,6 +1,6 @@
 export const copy = {
   fr: {
-    nav: ["Projets", "Méthode", "À propos"],
+    nav: ["Projets", "Méthode", "Expérience", "À propos"],
     contact: "Contact",
     navigation: "Navigation principale",
     language: "Langue du portfolio",
@@ -11,7 +11,7 @@ export const copy = {
     role: "Développeur full stack",
     specialty: "TypeScript, React et agents IA",
     hero: ["Logiciels métier", "et agents IA"],
-    intro: "Je conçois et développe des applications web et Mac. Je pars d’un besoin concret, je choisis comment le logiciel doit y répondre et je vérifie le résultat dans l’application.",
+    intro: "Je conçois des logiciels métier et des systèmes IA, de l’architecture aux tests. Je relie les LLM aux données et outils autorisés, puis je vérifie les réponses et les actions avant livraison.",
     location: "Elkridge, Maryland, États-Unis",
     portrait: "Portrait de Moustapha Adebigni",
     seeWork: "Voir les projets",
@@ -30,13 +30,30 @@ export const copy = {
     ],
     about: "À propos",
     independent: "Développement indépendant depuis juillet 2022",
-    aboutText: "Je construis des applications où plusieurs éléments doivent fonctionner ensemble. Avec Pokou AI, une demande peut passer d’une conversation à un service externe, puis à une personne. Avec Bridget, l’utilisateur doit pouvoir suivre les étapes et comprendre où une tâche s’est arrêtée.",
+    aboutText: "Je travaille avec des LLM, des agents IA et des workflows de récupération de contexte proches du RAG. Je pars des données auxquelles l’application est autorisée à accéder, sélectionne le contexte utile, le fournis au modèle, puis fais passer les actions par les règles métier, permissions et contrôles prévus. Pokou AI relie la conversation aux opérations ; Bridget rend l’exécution des agents visible et vérifiable.",
     aboutCareer: "Je souhaite rejoindre une équipe de développement sur le long terme et contribuer à des produits qui intègrent l’IA aux opérations métier.",
+    experience: "Expérience",
+    experienceIntro: "Depuis juillet 2022, je développe de manière indépendante des produits logiciels, en combinant cadrage produit, interfaces, API, données et agents de programmation.",
+    experienceRole: "Développeur logiciel indépendant",
+    experiencePeriod: "Juillet 2022 — aujourd’hui",
+    experienceBullets: [
+      "Je transforme les besoins en parcours, règles métier, modèles de données, fonctionnalités et critères de vérification.",
+      "Je conçois des workflows avec LLM : données privées récupérées sous contrôle d’accès, contexte pertinent fourni au modèle, prompts adaptés au cas d’usage, outils appelés dans des limites explicites.",
+      "Claude Code et Codex accélèrent l’implémentation ; je révise les diffs GitHub, reproduis les erreurs, teste les parcours et documente les décisions dans des fichiers Markdown versionnés."
+    ],
+    dataFlowTitle: "Comment je relie des données privées aux réponses IA",
+    dataFlowIntro: "Une approche d’ancrage contextuel inspirée du RAG, adaptée à chaque projet — sans présenter tous les systèmes comme des moteurs de recherche vectorielle.",
+    dataFlow: ["Données et permissions", "Contexte métier utile", "LLM + instructions", "Règles, action et vérification"],
+    education: "Formation",
+    educationItems: [
+      ["Université Félix Houphouët-Boigny", "Droit · Études universitaires non diplômantes (aucun diplôme obtenu) · 2015"],
+      ["Collège Moderne Robert Léon", "Diplôme de fin d’études secondaires · 2008"]
+    ],
     skills: "Technologies et méthodes",
     skillGroups: [
       ["Web et données", "TypeScript, React, Next.js, Fastify, REST, PostgreSQL, Supabase, Redis"],
-      ["IA et automatisation", "Agents de programmation, API OpenAI et Claude, appels d’outils, validation humaine"],
-      ["Qualité et livraison", "Documentation technique, Git/GitHub, tests fonctionnels et de régression, Vercel, Railway"]
+      ["LLM, RAG & agents", "Claude Code, Codex, API OpenAI et Claude, prompt engineering, recherche de contexte autorisé (approche RAG), appels d’outils, validation humaine"],
+      ["Cloud et livraison", "Google Cloud Platform (GCP), documentation Markdown versionnée, Git/GitHub, tests fonctionnels et de régression, Vercel, Railway"]
     ],
     contactTitle: "Parlons de votre projet",
     contactBody: "Je suis ouvert aux postes à temps plein, y compris à distance. Vous pouvez me joindre en français ou en anglais.",
@@ -57,7 +74,7 @@ export const copy = {
     returnHome: "Retour à l’accueil"
   },
   en: {
-    nav: ["Projects", "Approach", "About"],
+    nav: ["Projects", "Approach", "Experience", "About"],
     contact: "Contact",
     navigation: "Main navigation",
     language: "Portfolio language",
@@ -68,7 +85,7 @@ export const copy = {
     role: "Full-stack developer",
     specialty: "TypeScript, React and AI agents",
     hero: ["Business software", "and AI agents"],
-    intro: "I design and build web and Mac applications. I start with a real problem, decide how the software should solve it, and verify the result in the application.",
+    intro: "I build business software and AI systems, from architecture to testing. I connect LLMs with authorized data and tools, then verify outputs and actions before release.",
     location: "Elkridge, Maryland, United States",
     portrait: "Portrait of Moustapha Adebigni",
     seeWork: "View projects",
@@ -87,13 +104,30 @@ export const copy = {
     ],
     about: "About",
     independent: "Independent development since July 2022",
-    aboutText: "I build applications that need several moving parts to work together. In Pokou AI, a request can move from a conversation to an external service and then to a person. In Bridget, users need to follow the steps and see where a task stopped.",
+    aboutText: "I work with LLMs, AI agents and context-retrieval patterns inspired by RAG. I start with data the application is authorized to access, select relevant context for the model and keep actions behind business rules, permissions and checks. Pokou AI connects conversations to operations; Bridget makes agent execution visible and verifiable.",
     aboutCareer: "I’m looking to join an engineering team for the long term and contribute to products that bring AI into business operations.",
+    experience: "Experience",
+    experienceIntro: "Since July 2022 I have independently built software products across product scoping, interfaces, APIs, data and coding agents.",
+    experienceRole: "Independent Software Developer",
+    experiencePeriod: "July 2022 — present",
+    experienceBullets: [
+      "I turn product needs into user flows, business rules, data models, features and verifiable acceptance criteria.",
+      "I design LLM workflows: private data retrieved within access boundaries, relevant context supplied to the model, prompts tailored to the task, and tool calls within explicit controls.",
+      "Claude Code and Codex accelerate implementation; I review GitHub diffs, reproduce failures, test workflows and document decisions in version-controlled Markdown files."
+    ],
+    dataFlowTitle: "How private data informs AI answers",
+    dataFlowIntro: "A context-grounding approach inspired by RAG, tailored to each project — without claiming every system uses vector search.",
+    dataFlow: ["Data & permissions", "Relevant business context", "LLM + instructions", "Rules, action & verification"],
+    education: "Education",
+    educationItems: [
+      ["Université Félix Houphouët-Boigny", "Law · No Degree Completed · 2015"],
+      ["Collège Moderne Robert Léon", "High School Diploma · 2008"]
+    ],
     skills: "Technologies and methods",
     skillGroups: [
       ["Web and data", "TypeScript, React, Next.js, Fastify, REST, PostgreSQL, Supabase, Redis"],
-      ["AI and automation", "Coding agents, OpenAI and Claude APIs, tool calling, human approval"],
-      ["Quality and delivery", "Technical documentation, Git/GitHub, functional and regression tests, Vercel, Railway"]
+      ["LLMs, RAG & agents", "Claude Code, Codex, OpenAI and Claude APIs, prompt engineering, authorized context retrieval (RAG-style), tool calling, human approval"],
+      ["Cloud & delivery", "Google Cloud Platform (GCP), version-controlled Markdown documentation, Git/GitHub, functional and regression tests, Vercel, Railway"]
     ],
     contactTitle: "Let’s talk about your project",
     contactBody: "I’m open to full-time roles, including remote work. You can reach me in French or English.",
