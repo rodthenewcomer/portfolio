@@ -15,7 +15,7 @@ import type { Language } from "./language";
 type Project = (typeof projects)[number];
 type Screenshot = Project["hero"];
 
-const sectionIds = ["work", "approach", "about"];
+const sectionIds = ["work", "approach", "experience", "about"];
 const caseIds = ["case-problem", "case-decisions", "case-system", "case-build"];
 const stepIcons = [Search, ListChecks, Code2, ClipboardCheck];
 
@@ -221,6 +221,36 @@ function Approach() {
   );
 }
 
+function Experience() {
+  const text = copy[useLanguage()];
+  return (
+    <section className="experience section" id="experience" aria-labelledby="experience-title">
+      <div className="container experience-shell">
+        <div className="experience-lead">
+          <p className="category">{text.experiencePeriod}</p>
+          <h2 id="experience-title">{text.experience}</h2>
+          <p>{text.experienceIntro}</p>
+        </div>
+        <div className="experience-detail">
+          <h3>{text.experienceRole}</h3>
+          <ul className="experience-list">
+            {text.experienceBullets.map(item => <li key={item}>{item}</li>)}
+          </ul>
+          <div className="data-flow-card">
+            <h3>{text.dataFlowTitle}</h3>
+            <p>{text.dataFlowIntro}</p>
+            <ol className="data-flow">
+              {text.dataFlow.map((item, index) => (
+                <li key={item}><span>{String(index + 1).padStart(2, "0")}</span>{item}</li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function About() {
   const text = copy[useLanguage()];
   return (
@@ -234,6 +264,10 @@ function About() {
       <div className="skills">
         <h3>{text.skills}</h3>
         <dl>{text.skillGroups.map(([name, values]) => <div key={name}><dt>{name}</dt><dd>{values}</dd></div>)}</dl>
+        <div className="education-block">
+          <h3>{text.education}</h3>
+          <ul>{text.educationItems.map(([school, detail]) => <li key={school}><strong>{school}</strong><span>{detail}</span></li>)}</ul>
+        </div>
       </div>
     </section>
   );
@@ -374,7 +408,7 @@ export default function App() {
       <a className="skip-link" href="#main">{copy[language].skip}</a>
       <Header key={path} path={path} />
       <main id="main" tabIndex={-1}>
-        {path === "/" ? <><Hero /><Work /><Approach /><About /><Contact /></>
+        {path === "/" ? <><Hero /><Work /><Approach /><Experience /><About /><Contact /></>
           : project ? <ProjectPage project={project} /> : <NotFound />}
       </main>
       <Footer />
