@@ -4,42 +4,83 @@
     "name": "Pokou AI",
     "theme": "business",
     "publicUrl": "https://pokou.ai/",
-    "stack": ["Next.js", "TypeScript", "Fastify", "PostgreSQL", "OpenAI API", "Redis"],
-    "hero": { "file": "pokou-workflow.webp", "width": 1500, "height": 785 },
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Fastify",
+      "PostgreSQL",
+      "OpenAI API",
+      "Redis"
+    ],
+    "hero": {
+      "file": "pokou-workflow.webp",
+      "width": 1500,
+      "height": 785
+    },
     "fr": {
       "category": "Automatisation métier",
       "publicLabel": "Voir le site de Pokou AI",
       "headline": "De la demande client à l’action métier",
-      "summary": "Un assistant conversationnel qui applique des règles métier, déclenche des actions via API et transmet les exceptions à l’équipe avec leur contexte.",
+      "summary": "Un système conversationnel qui relie un LLM au contexte métier autorisé, applique des règles d’exécution, appelle des API et transmet les exceptions à une personne.",
       "heroAlt": "Page de Pokou AI illustrant le traitement d’une réservation d’hôtel, de la demande au transfert d’une exception",
       "heroCaption": "Page produit montrant un exemple de parcours hôtelier",
       "challenge": "Une demande reçue dans une conversation peut nécessiter des vérifications, une action dans un autre outil et un suivi par l’équipe. Quand ces étapes sont éparpillées, il devient difficile de savoir où en est la demande.",
-      "contribution": "J’ai cartographié les parcours clients, relié les conversations à des actions via API et structuré un moteur de règles partagé. Les modules hôtel et école ajoutent les étapes propres à chaque activité.",
+      "contribution": "J’ai défini les parcours et les instructions destinées au modèle, structuré l’accès au contexte métier utile, puis séparé génération de réponse, contrôles d’autorisation et exécution via API. Les modules hôtel et école réutilisent ce moteur.",
       "decisions": [
-        ["Un moteur commun", "J’ai centralisé les étapes réutilisables dans un moteur partagé. Les règles propres à l’hôtellerie et aux écoles restent dans leurs modules."],
-        ["Des actions encadrées", "Le moteur applique les règles métier entre l’interprétation du message et l’action via API. Cette séparation permet de suivre le parcours de la demande."],
-        ["Une reprise avec le contexte", "Quand la situation exige une personne, le transfert garde les informations utiles de la demande et la conversation."]
+        [
+          "Un moteur commun",
+          "J’ai centralisé les étapes réutilisables dans un moteur partagé. Les règles propres à l’hôtellerie et aux écoles restent dans leurs modules."
+        ],
+        [
+          "Des actions encadrées",
+          "Le modèle reçoit le contexte métier pertinent ; les règles de l’application déterminent les actions permises. L’accès aux données et l’exécution ne sont pas laissés à une réponse LLM seule."
+        ],
+        [
+          "Une reprise avec le contexte",
+          "Quand la situation exige une personne, le transfert garde les informations utiles de la demande et la conversation."
+        ]
       ],
-      "flow": ["Demande client", "Intention", "Règles métier", "Action via API", "Confirmation ou transfert"],
-      "verification": "J’ai suivi le parcours du message jusqu’à l’action pour vérifier le passage entre la conversation, les règles et les intégrations.",
+      "flow": [
+        "Demande client",
+        "Intention",
+        "Règles métier",
+        "Action via API",
+        "Confirmation ou transfert"
+      ],
+      "verification": "Le dépôt comprend des tests d’isolation RLS entre deux organisations et des scénarios E2E. J’ai vérifié le parcours entre conversation, contexte, règles métier, action et transfert.",
       "scope": "Moteur de règles partagé, modules hôtel et école, actions via API et transfert à une personne. La capture illustre un scénario hôtelier présenté sur la page produit."
     },
     "en": {
       "category": "Business operations",
       "publicLabel": "Visit the Pokou AI site",
       "headline": "From customer request to business action",
-      "summary": "A conversational assistant that applies business rules, triggers actions via APIs and hands exceptions to the team with the context they need.",
+      "summary": "A conversational AI system that grounds LLM responses in authorized business context, applies execution rules, calls APIs and hands exceptions to a person.",
       "heroAlt": "Pokou AI product page illustrating a hotel booking from the initial request to an exception handoff",
       "heroCaption": "Product page illustrating a hotel booking workflow",
       "challenge": "A request received in chat can require a few checks, an action in another tool and a follow-up from the team. When those steps are scattered, it gets harder to tell where the request stands.",
-      "contribution": "I mapped customer journeys, connected conversations to API-backed actions and structured a shared rules engine. Hotel and school modules add the steps specific to each business.",
+      "contribution": "I defined workflows and model instructions, structured access to relevant business context, then separated response generation, authorization checks and API execution. Hotel and school modules share the same engine.",
       "decisions": [
-        ["One shared engine", "I put reusable steps in a common engine. Rules specific to hotels and schools stay in their respective modules."],
-        ["Rules guide execution", "The engine applies business rules between interpreting a message and calling an API. Separating those steps makes the request easier to trace."],
-        ["Keep context at handoff", "When a request needs a person, the handoff carries the conversation and relevant details along with it."]
+        [
+          "One shared engine",
+          "I put reusable steps in a common engine. Rules specific to hotels and schools stay in their respective modules."
+        ],
+        [
+          "Rules guide execution",
+          "The model receives relevant business context; application rules determine which actions are allowed. Access to data and execution do not depend on the LLM response alone."
+        ],
+        [
+          "Keep context at handoff",
+          "When a request needs a person, the handoff carries the conversation and relevant details along with it."
+        ]
       ],
-      "flow": ["Customer request", "Intent", "Business rules", "API action", "Confirmation or handoff"],
-      "verification": "I followed requests from message to action to check how the conversation, business rules and integrations fit together.",
+      "flow": [
+        "Customer request",
+        "Intent",
+        "Business rules",
+        "API action",
+        "Confirmation or handoff"
+      ],
+      "verification": "The repository includes RLS isolation tests for two organizations and end-to-end scenarios. I checked the workflow from conversation and context through business rules, action and handoff.",
       "scope": "Shared rules engine, hotel and school modules, API-backed actions and a human handoff. The screenshot illustrates a hotel scenario from the product page."
     }
   },
@@ -48,9 +89,26 @@
     "name": "Edge Forensics",
     "theme": "analytics",
     "publicUrl": "https://edgeforensics.io/demo",
-    "stack": ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL", "Claude API"],
-    "hero": { "file": "edge-overview.webp", "width": 1500, "height": 760 },
-    "gallery": [{ "file": "edge-report.webp", "width": 1500, "height": 902 }],
+    "stack": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+      "Claude API"
+    ],
+    "hero": {
+      "file": "edge-overview.webp",
+      "width": 1500,
+      "height": 760
+    },
+    "gallery": [
+      {
+        "file": "edge-report.webp",
+        "width": 1500,
+        "height": 902
+      }
+    ],
     "fr": {
       "category": "Analyse de données",
       "publicLabel": "Essayer la démo Edge Forensics",
@@ -58,15 +116,35 @@
       "summary": "Une application full stack qui importe des historiques de transactions, calcule les indicateurs dans le code et s’appuie sur l’IA pour expliquer les comportements observés.",
       "heroAlt": "Page Edge Forensics affichant un exemple de rapport d’analyse de transactions",
       "heroCaption": "Aperçu du produit avec des données d’exemple",
-      "galleryText": [["Exemple de rapport Edge Forensics avec indicateurs de performance, résultats par instrument et score de risque", "Rapport d’exemple présentant les résultats par instrument et le niveau de risque"]],
-      "challenge": "Un historique de transactions indique ce qui s’est passé. Pour préparer la séance suivante, il faut pouvoir repérer les comportements qui se répètent et revenir aux données qui les étayent.",
-      "contribution": "J’ai conçu le parcours d’import jusqu’au rapport, défini les indicateurs avec la logique applicative, intégré l’API Claude et relié le rapport à un journal de séance.",
-      "decisions": [
-        ["Normaliser les imports", "Quatre formats d’export alimentent un parcours commun d’analyse et de restitution."],
-        ["Calculer dans l’application", "La logique applicative calcule les indicateurs, dont la durée des transactions. L’API Claude intervient ensuite pour mettre en contexte les résultats."],
-        ["Relier le constat à la suite", "Le rapport présente les éléments qui étayent un comportement. Le journal permet de noter un point à travailler lors de la prochaine séance."]
+      "galleryText": [
+        [
+          "Exemple de rapport Edge Forensics avec indicateurs de performance, résultats par instrument et score de risque",
+          "Rapport d’exemple présentant les résultats par instrument et le niveau de risque"
+        ]
       ],
-      "flow": ["Export de transactions", "Import et normalisation", "Calcul des indicateurs", "Interprétation IA", "Rapport et journal"],
+      "challenge": "Un historique de transactions indique ce qui s’est passé. Pour préparer la séance suivante, il faut pouvoir repérer les comportements qui se répètent et revenir aux données qui les étayent.",
+      "contribution": "J’ai structuré les imports et les métriques déterministes, puis intégré l’API Claude pour expliquer les résultats à partir de données de séance déjà calculées. Les données du journal relèvent du contexte utilisateur, pas d’une connaissance inventée par le modèle.",
+      "decisions": [
+        [
+          "Normaliser les imports",
+          "Quatre formats d’export alimentent un parcours commun d’analyse et de restitution."
+        ],
+        [
+          "Calculer dans l’application",
+          "Les métriques sont calculées en code avant d’être transmises au LLM comme contexte vérifiable. Le modèle explique des valeurs existantes au lieu de produire les chiffres."
+        ],
+        [
+          "Relier le constat à la suite",
+          "Le rapport présente les éléments qui étayent un comportement. Le journal permet de noter un point à travailler lors de la prochaine séance."
+        ]
+      ],
+      "flow": [
+        "Export de transactions",
+        "Import et normalisation",
+        "Calcul des indicateurs",
+        "Interprétation IA",
+        "Rapport et journal"
+      ],
       "verification": "J’ai revu le parcours d’import et contrôlé les indicateurs affichés dans le rapport. La séparation entre calcul et interprétation permet d’examiner les valeurs avant la génération du texte.",
       "scope": "Quatre formats d’export, quatorze schémas comportementaux et un journal de séance. Les valeurs visibles dans les captures proviennent d’un rapport d’exemple."
     },
@@ -77,15 +155,35 @@
       "summary": "A full-stack app that imports trading history, calculates metrics in code and uses AI to explain the behavior in the data.",
       "heroAlt": "Edge Forensics page displaying a sample trading analysis report",
       "heroCaption": "Product preview with sample data",
-      "galleryText": [["Sample Edge Forensics report, showing performance metrics, breakdown by instrument and a risk score", "Sample report with instrument-level results and risk indicators"]],
-      "challenge": "Trade history tells you what happened. To prepare for the next session, traders need to spot recurring behavior and find the data that supports it.",
-      "contribution": "I designed the workflow from import to report, defined the metrics in application logic, integrated the Claude API and connected the report to a session journal.",
-      "decisions": [
-        ["Normalize incoming files", "Four export formats feed a common workflow for analysis and reporting."],
-        ["Calculate metrics in code", "Application logic calculates metrics, including how long trades stay open. The Claude API then puts the results in context."],
-        ["Tie insights to the next session", "The report includes the evidence behind a pattern. The journal gives traders a place to record one thing to work on next time."]
+      "galleryText": [
+        [
+          "Sample Edge Forensics report, showing performance metrics, breakdown by instrument and a risk score",
+          "Sample report with instrument-level results and risk indicators"
+        ]
       ],
-      "flow": ["Trade export", "Parse and normalize", "Calculate metrics", "AI interpretation", "Report and journal"],
+      "challenge": "Trade history tells you what happened. To prepare for the next session, traders need to spot recurring behavior and find the data that supports it.",
+      "contribution": "I structured imports and deterministic metrics, then integrated the Claude API to explain results using already-calculated session data. Journal data supplies user context rather than invented model knowledge.",
+      "decisions": [
+        [
+          "Normalize incoming files",
+          "Four export formats feed a common workflow for analysis and reporting."
+        ],
+        [
+          "Calculate metrics in code",
+          "Metrics are computed in code before they are supplied to the LLM as verifiable context. The model explains existing figures instead of generating the numbers."
+        ],
+        [
+          "Tie insights to the next session",
+          "The report includes the evidence behind a pattern. The journal gives traders a place to record one thing to work on next time."
+        ]
+      ],
+      "flow": [
+        "Trade export",
+        "Parse and normalize",
+        "Calculate metrics",
+        "AI interpretation",
+        "Report and journal"
+      ],
       "verification": "I reviewed the import workflow and checked the metrics shown in the report. Separating calculation from interpretation makes it possible to inspect the figures before any text is generated.",
       "scope": "Four export formats, fourteen trading behavior patterns and a session journal. The screenshots use figures from a sample report."
     }
@@ -94,24 +192,58 @@
     "slug": "bridget",
     "name": "Bridget",
     "theme": "agent",
-    "stack": ["Swift", "SwiftUI", "macOS"],
-    "hero": { "file": "bridget-workspace.webp", "width": 1500, "height": 844 },
-    "gallery": [{ "file": "bridget-automation.webp", "width": 1500, "height": 844 }],
+    "stack": [
+      "Swift",
+      "SwiftUI",
+      "macOS"
+    ],
+    "hero": {
+      "file": "bridget-workspace.webp",
+      "width": 1500,
+      "height": 844
+    },
+    "gallery": [
+      {
+        "file": "bridget-automation.webp",
+        "width": 1500,
+        "height": 844
+      }
+    ],
     "fr": {
       "category": "Agents IA sur macOS",
       "headline": "Des agents IA dont on peut suivre les actions",
       "summary": "Un espace de travail macOS qui transforme une demande en étapes, encadre l’accès aux outils et affiche l’état de l’exécution.",
       "heroAlt": "Interface macOS de Bridget affichant le tableau de bord, les tâches et les services connectés",
       "heroCaption": "Espace de travail macOS et suivi des tâches",
-      "galleryText": [["Conversation Bridget présentant une veille de vols planifiée et ses commandes", "Veille planifiée avec état, fréquence et commandes"]],
-      "challenge": "Pour mener une tâche entre plusieurs outils, un assistant doit obtenir les accès nécessaires et rendre visible ce qui s’est passé. L’utilisateur doit pouvoir reprendre la main si une étape échoue.",
-      "contribution": "J’ai travaillé sur l’interface SwiftUI, le suivi des tâches et les limites entre agent, outils et exécution locale. J’ai aussi examiné les échecs d’action pour rendre leurs résultats vérifiables dans l’interface.",
-      "decisions": [
-        ["Structurer la demande", "Le travail est suivi sous forme d’étapes, chacune avec son rôle et son état. L’utilisateur peut voir ce qui attend une intervention."],
-        ["Gérer les permissions", "Une action proposée passe par les permissions prévues par le parcours. Les étapes qui l’exigent sont soumises à approbation."],
-        ["Exposer le résultat", "L’interface distingue les étapes exécutées de celles qui ont échoué ou exigent un suivi."]
+      "galleryText": [
+        [
+          "Conversation Bridget présentant une veille de vols planifiée et ses commandes",
+          "Veille planifiée avec état, fréquence et commandes"
+        ]
       ],
-      "flow": ["Objectif", "Plan", "Permissions", "Exécution", "Vérification"],
+      "challenge": "Pour mener une tâche entre plusieurs outils, un assistant doit obtenir les accès nécessaires et rendre visible ce qui s’est passé. L’utilisateur doit pouvoir reprendre la main si une étape échoue.",
+      "contribution": "J’ai travaillé sur l’interface SwiftUI, la coordination des agents IA, la circulation du contexte de tâche, les frontières d’accès aux outils et la validation des résultats. J’ai également investigué des erreurs d’intégration et leurs états visibles.",
+      "decisions": [
+        [
+          "Structurer la demande",
+          "Le travail est suivi sous forme d’étapes, chacune avec son rôle et son état. L’utilisateur peut voir ce qui attend une intervention."
+        ],
+        [
+          "Gérer les permissions",
+          "Les agents reçoivent le contexte nécessaire à leur tâche ; l’accès aux outils reste soumis aux permissions et, lorsque nécessaire, à une approbation explicite de l’utilisateur."
+        ],
+        [
+          "Exposer le résultat",
+          "L’interface distingue les étapes exécutées de celles qui ont échoué ou exigent un suivi."
+        ]
+      ],
+      "flow": [
+        "Objectif",
+        "Plan",
+        "Permissions",
+        "Exécution",
+        "Vérification"
+      ],
       "verification": "J’ai reproduit des actions en échec et examiné les frontières d’intégration et les états affichés côté macOS pour comprendre où le parcours se bloquait.",
       "scope": "Étude centrée sur le parcours macOS, le suivi des tâches et les permissions. La galerie montre l’interface d’une veille planifiée."
     },
@@ -121,15 +253,35 @@
       "summary": "A macOS workspace that turns requests into steps, controls access to tools and shows the state of each action.",
       "heroAlt": "Bridget’s macOS workspace showing the dashboard, tasks and connected services",
       "heroCaption": "macOS workspace and task tracking",
-      "galleryText": [["Bridget conversation showing a scheduled flight watch and its controls", "Scheduled watch with status, frequency and controls"]],
-      "challenge": "To complete a task across tools, an assistant needs the right access and a way to show what happened. The user needs a clear way to step in when something fails.",
-      "contribution": "I worked on the SwiftUI interface, task tracking and the boundaries between agents, tools and local execution. I also investigated failed actions to make their results easier to verify in the interface.",
-      "decisions": [
-        ["Break requests into steps", "Each step has a purpose and a state. The user can see which actions are waiting for their attention."],
-        ["Manage permissions", "Proposed actions go through the workflow’s permission checks. Steps that require user approval wait for it."],
-        ["Show what happened", "The interface distinguishes completed steps from failures and actions that need follow-up."]
+      "galleryText": [
+        [
+          "Bridget conversation showing a scheduled flight watch and its controls",
+          "Scheduled watch with status, frequency and controls"
+        ]
       ],
-      "flow": ["Goal", "Plan", "Permissions", "Execute", "Verify"],
+      "challenge": "To complete a task across tools, an assistant needs the right access and a way to show what happened. The user needs a clear way to step in when something fails.",
+      "contribution": "I worked on the SwiftUI interface, AI-agent coordination, task-context handoffs, tool-access boundaries and outcome validation. I also investigated integration failures and their visible states.",
+      "decisions": [
+        [
+          "Break requests into steps",
+          "Each step has a purpose and a state. The user can see which actions are waiting for their attention."
+        ],
+        [
+          "Manage permissions",
+          "Agents receive the task context they need; access to tools remains behind permissions and, where required, explicit user approval."
+        ],
+        [
+          "Show what happened",
+          "The interface distinguishes completed steps from failures and actions that need follow-up."
+        ]
+      ],
+      "flow": [
+        "Goal",
+        "Plan",
+        "Permissions",
+        "Execute",
+        "Verify"
+      ],
       "verification": "I reproduced failed actions and looked at the integration boundaries and macOS task states to find where the workflow was getting stuck.",
       "scope": "This case study covers the macOS task workflow, tracking and permissions. The gallery shows the controls for a scheduled watch."
     }
