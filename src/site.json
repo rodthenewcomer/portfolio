@@ -1,10 +1,10 @@
 {
   "fr": {
     "title": "Moustapha Adebigni | Développeur full stack TypeScript, React et IA",
-    "description": "Développeur indépendant depuis juillet 2022. Projets TypeScript, React et IA : automatisation métier avec Pokou AI, analyse de données avec Edge Forensics et orchestration d’agents avec Bridget."
+    "description": "Développeur full stack indépendant depuis 2022 : TypeScript, React, agents IA, LLM, workflows de récupération de contexte inspirés du RAG et Google Cloud Platform (GCP). Études de cas Pokou AI, Edge Forensics et Bridget."
   },
   "en": {
     "title": "Moustapha Adebigni | Full-stack TypeScript, React and AI developer",
-    "description": "Independent developer since July 2022. TypeScript, React and AI projects: business automation with Pokou AI, data analytics with Edge Forensics and agent orchestration with Bridget."
+    "description": "Independent full-stack developer since 2022 working with TypeScript, React, AI agents, LLMs, RAG-style context retrieval and Google Cloud Platform (GCP). Case studies: Pokou AI, Edge Forensics and Bridget."
   }
 }
